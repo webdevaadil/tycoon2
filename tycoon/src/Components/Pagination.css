@@ -1,0 +1,12 @@
+.page_button{
+    display: flex;
+    justify-content: end;
+    color: white;
+}
+.page_button_content{
+    display: flex;
+    
+}
+.page_button_content div{
+    margin: 17px 5px 0 ;
+}
