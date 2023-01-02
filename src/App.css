@@ -239,10 +239,11 @@ th.head_trader {
   width: 15%;
 }
 
-tr.sub-body:hover input.btn.btn-primary {
+.body_follow:hover input.btn.btn-primary {
   background: transparent;
   color: #FFBA00 !important;
 }
+
 .ctt tr.sub-body{
   background: #0E1A29;
   border-radius: 5px;

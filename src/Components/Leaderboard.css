@@ -27,10 +27,14 @@
 
 .ascending {
    background-color: transparent;
+   color: #FFBA00 !important;
+   font-weight: 500 !important;
 }
 
 .descending {
    background-color: transparent;
+   color: #FFBA00 !important;
+   font-weight: 500 !important;
 
 }
 
@@ -66,6 +70,7 @@ thead th {
 thead th.ascending::after {
    content: '⬇';
    display: inline-block;
+  color: #fff;
 
 
 }
@@ -219,6 +224,8 @@ thead th.descending::after {
    justify-content: end;
    border-top: 2px solid #495D75;
    margin-top: 20px;
+
+justify-content: center
 }
 /* th.head_sno:after {
    content: '';
@@ -387,6 +394,26 @@ button.bnnerbtn {
    justify-content: center;
    align-items: center;
 
+}
+.loadmore{
+   border-radius: 5px;
+   padding: 10px 15px;
+   background: linear-gradient(  0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(265.56deg, #F3BA2F -0.27%, #FFBA00 -0.26%, #EEC124 69.03%, #FFBA00 98.59%);
+   border: 1px solid transparent;
+   font-weight: 500;
+   color: #041624;
+   font-size: 15px;
+   line-height: 20px;
+   font-family: 'Inter', sans-serif;
+   /* width: 100px; */
+   /* background: transparent; */
+   /* color: #F0F9FF; */
+  margin: 10px 10px;
+}
+.loadmore:hover{
+   background: transparent;
+   color: #FFBA00 !important;
+   border: 1px solid #FFBA00;
 }
 
 
