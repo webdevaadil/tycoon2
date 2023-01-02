@@ -5,6 +5,7 @@ import leadericon from "./Images/BinanceFutures.svg";
 import leadericon1 from "./Images/table-logo.png";
 import Mobbtn from "./Mobbtn";  
 import Desbtn from './Desbtn';
+import axios from 'axios';
 
 const useSortableData = (items, config = null) => {
     const [sortConfig, setSortConfig] = React.useState(config);
@@ -75,9 +76,47 @@ const ProductTable = (props) => {
     // useEffect(() => {
 
     // }, [])
+const apis=()=>{
+    fetch('https://ca-signalsleaderboard-dev.orangedesert-af9d2c45.westeurope.azurecontainerapps.io/LeaderboardApi/GetLeaderboards', {
+      mode: 'no-cors',
+      method: 'GET',
+      dataType: 'json',
+      headers: {
+        'Access-Control-Allow-Origin':'*',
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+
+    })
+    .catch(error => {
+        console.error(error);
+    });
+    fetch('https://ca-signalsleaderboard-dev.orangedesert-af9d2c45.westeurope.azurecontainerapps.io/LeaderboardApi/GetLeadersWithPositions', {
+      mode: 'no-cors',
+      method: 'GET',
+      dataType: 'json',
+      headers: {
+        'Access-Control-Allow-Origin':'*',
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+
+    })
+    .catch(error => {
+        console.error(error);
+    })
+   
+}
 
     useEffect(() => {
         getdummy()
+        apis()
             }, [currentPage])
         
             const getdummy = () => {
