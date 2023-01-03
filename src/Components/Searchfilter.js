@@ -67,9 +67,9 @@ const [leaderboard, setLeaderboard] = useState();
     setIsActive((current) => !current);
   };
 
-  // useEffect(() => {
-
-  // }, [])
+  useEffect(() => {
+    requestSort("daily")
+  }, [])
   const apis = async() => {
     await fetch(
       "https://ca-signalsleaderboard-dev.orangedesert-af9d2c45.westeurope.azurecontainerapps.io/LeaderboardApi/GetLeaderboards",
