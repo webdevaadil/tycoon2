@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Leaderboard.css";
+// import "./Leaderboard.css";
 import { Pagination } from "./Pagination";
 import leadericon from "./Images/BinanceFutures.svg";
 import leadericon1 from "./Images/table-logo.png";
@@ -10,8 +10,7 @@ import axios from "axios";
 const useSortableData = (items, config = null) => {
   const [sortConfig, setSortConfig] = React.useState(config);
   const [nameclass, setNameclass] = useState("");
-  
-  
+
   const sortedItems = React.useMemo(() => {
     let sortableItems = [...items];
     if (sortConfig !== null) {
@@ -45,6 +44,7 @@ const useSortableData = (items, config = null) => {
 
 const ProductTable = (props) => {
   const [loadmores, setLoadmore] = useState(1);
+const [leaderboard, setLeaderboard] = useState();
 
   const [changeClass, setChangeClass] = useState(null);
   const [a, setA] = useState();
@@ -70,45 +70,44 @@ const ProductTable = (props) => {
   // useEffect(() => {
 
   // }, [])
-  const apis = () => {
-    fetch(
+  const apis = async() => {
+    await fetch(
       "https://ca-signalsleaderboard-dev.orangedesert-af9d2c45.westeurope.azurecontainerapps.io/LeaderboardApi/GetLeaderboards",
       {
         mode: "no-cors",
         method: "GET",
-        dataType: "json",
         headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "multipart/form-data",
+          "Access-Control-Allow-Origin": "http://localhost:3000/",
         },
       }
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log(data,"aa");
       })
       .catch((error) => {
         console.error(error);
       });
-    fetch(
-      "https://ca-signalsleaderboard-dev.orangedesert-af9d2c45.westeurope.azurecontainerapps.io/LeaderboardApi/GetLeadersWithPositions",
-      {
-        mode: "no-cors",
-        method: "GET",
-        dataType: "json",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      console.log(leaderboard);
+    // fetch(
+    //   "https://ca-signalsleaderboard-dev.orangedesert-af9d2c45.westeurope.azurecontainerapps.io/LeaderboardApi/GetLeadersWithPositions",
+    //   {
+    //     mode: "no-cors",
+    //     method: "GET",
+    //     dataType: "json",
+    //     headers: {
+    //       "Access-Control-Allow-Origin": "*",
+    //       "Content-Type": "multipart/form-data",
+    //     },
+    //   }
+    // )
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
   };
 
   useEffect(() => {
@@ -131,18 +130,21 @@ const ProductTable = (props) => {
     }
     return sortConfig.key === name ? sortConfig.direction : undefined;
   };
-const loadmore=()=>{
-    setLoadmore(loadmores+1)
-    console.log("test1");
-
-}
-const loadless=()=>{
-    if(loadmores != 1){
-        setLoadmore(loadmores-1)
+  const loadmore = () => {
+    if (loadmores == totalPages) {
+      return;
+    } else {
+      setLoadmore(loadmores + 1);
     }
-    
-
-}
+    console.log("test1");
+    console.log(loadmores, totalPages);
+  };
+  const loadless = () => {
+    if (loadmores != 1) {
+      setLoadmore(loadmores - 1);
+      console.log(loadmores, totalPages);
+    }
+  };
   return (
     <>
       <div className="container">
@@ -230,7 +232,7 @@ const loadless=()=>{
             >
               <thead>
                 <tr>
-                  <th className="head_sno">#</th>
+                  <th className="head_sno" style={{width:"0%"}}>#</th>
                   <th className="head_trader">
                     {" "}
                     <button
@@ -301,10 +303,7 @@ const loadless=()=>{
               </thead>
               <tbody className="ctt">
                 {items
-                  .slice(
-                    (0) ,
-                    loadmores * ITEMS_PER_PAGE
-                  )
+                  .slice(0, loadmores * ITEMS_PER_PAGE)
                   .filter((value) => {
                     return ` ${value.trader} ${value.daily} ${value.weekly} ${value.monthly} ${value.alltime} ${value.follower}${value.openposition} `
                       .toLowerCase()
@@ -435,11 +434,13 @@ const loadless=()=>{
                     }`}{" "}
                 of {items.length}
               </p> */}
-               <button  className="btn loadmore" onClick={loadmore}>Load more</button>
-          {loadmores!=1?(  <button  className="btn loadmore" onClick={loadless}>Load less</button>):("")}
-          </div>
+              {loadmores == totalPages?(""):(  <button className="btn loadmore" onClick={loadmore}>
+                Load more
+              </button>)}
+            
             </div>
-            {/* <div onClick={getdummy}>
+          </div>
+          {/* <div onClick={getdummy}>
                 
                <Pagination
                 currentPage={currentPage}
@@ -447,14 +448,10 @@ const loadless=()=>{
                 handlePageChange={(page) => setCurrentPage(page)}
               /> 
             </div> */}
-           
         </div>
         <div className="media_Body">
           {items
-            .slice(
-              0,
-              loadmores * ITEMS_PER_PAGE
-            )
+            .slice(0, loadmores * ITEMS_PER_PAGE)
             .filter((value) => {
               return ` ${value.trader} ${value.daily} ${value.weekly} ${value.monthly} ${value.alltime} ${value.follower}${value.openposition} `
                 .toLowerCase()
@@ -589,8 +586,9 @@ const loadless=()=>{
             <div>
               <p></p>
             </div>
-            <button  className="btn loadmore" onClick={loadmore}>Load more</button>
-          {loadmores!=1?(  <button  className="btn loadmore" onClick={loadless}>Load less</button>):("")}
+            <button className="btn loadmore" onClick={loadmore}>
+              Load more
+            </button>
             {/* <div className="pagination_btm">
               <div className="btm_p">
                 <p>
