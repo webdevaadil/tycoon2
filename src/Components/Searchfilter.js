@@ -586,9 +586,9 @@ const [leaderboard, setLeaderboard] = useState();
             <div>
               <p></p>
             </div>
-            <button className="btn loadmore" onClick={loadmore}>
-              Load more
-            </button>
+            {loadmores == totalPages?(""):(  <button className="btn loadmore" onClick={loadmore}>
+                Load more
+              </button>)}
             {/* <div className="pagination_btm">
               <div className="btm_p">
                 <p>
