@@ -49,22 +49,29 @@ const ProductTable = ({
   periodType,
 }) => {
   useEffect(() => {
-    requestSort(periodType);
+    console.log(periodType);
+    
+    let periodTypes= `${periodType}ROI`
+    requestSort(periodTypes);
+    getClassNamesFor(periodTypes);
   }, [periodType]);
+  useEffect(() => {
+
+    
+   
+    requestSort("dailyROI");
+    getClassNamesFor("dailyROI");
+  }, []);
 
   const [loadmores, setLoadmore] = useState(1);
 
-  const [changeClass, setChangeClass] = useState(null);
   const [a, setA] = useState();
   const [search, setSearch] = useState("");
   let { items, requestSort, sortConfig } = useSortableData(products[0]);
   const ITEMS_PER_PAGE = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
-  const [b, setB] = useState();
-  const [c, setC] = useState(0);
 
-  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     getdummy();
@@ -93,16 +100,8 @@ const ProductTable = ({
     }
     console.log(loadmores, totalPages);
   };
-  const loadless = () => {
-    // if (loadmores != 1) {
-    //   setLoadmore(loadmores - 1);
-    //   console.log(loadmores, totalPages);
-    // }
-  };
-  const settolocal = (e) => {
-    console.log(e.target.value);
-    localStorage.setItem("sorttype", JSON.stringify(e.target.value));
-  };
+
+
 
   return (
     <>
@@ -158,16 +157,16 @@ const ProductTable = ({
                       onChange={changeStateperiod}
                     >
                       {/* <option selected disabled>Select</option> */}
-                      <option name="daily" value="dailyROI">
+                      <option  value="dailyROI">
                         Daily
                       </option>
-                      <option name="weekly" value="weeklyROI">
+                      <option  value="weeklyROI">
                         Weekly
                       </option>
-                      <option name="monthly" value="monthlyROI">
+                      <option  value="monthlyROI">
                         Monthly
                       </option>
-                      <option name="all" value="allROI">
+                      <option  value="allROI">
                         All
                       </option>
                     </select>
