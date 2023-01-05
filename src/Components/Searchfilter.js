@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Pagination } from "./Pagination";
 import leadericon from "./Images/BinanceFutures.svg";
 import leadericon1 from "./Images/table-logo.png";
+import dummy from "./Images/th-2964712677";
 import Mobbtn from "./Mobbtn";
 import Desbtn from "./Desbtn";
 import axios from "axios";
@@ -303,7 +304,11 @@ const ProductTable = ({
                                 className="trader_img"
                               />
                             ) : (
-                              <p className="trader_img"></p>
+                              <img
+                              src={dummy}
+                              alt=""
+                              className="trader_img"
+                            />
                             )}
                             {items.nickName}
                           </td>
