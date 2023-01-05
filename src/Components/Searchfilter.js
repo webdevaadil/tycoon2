@@ -10,7 +10,6 @@ import axios from "axios";
 const useSortableData = (items, config = null) => {
   const [sortConfig, setSortConfig] = React.useState(config);
   const [nameclass, setNameclass] = useState("");
-
   const sortedItems = React.useMemo(() => {
     let sortableItems = [...items];
     if (sortConfig !== null) {
@@ -42,14 +41,22 @@ const useSortableData = (items, config = null) => {
   return { items: sortedItems, requestSort, sortConfig };
 };
 
-const ProductTable = (props) => {
+const ProductTable = ({
+  changeState,
+  products,
+  changeStateperiod,
+  periodType,
+}) => {
+  useEffect(() => {
+    requestSort(periodType);
+  }, [periodType]);
+
   const [loadmores, setLoadmore] = useState(1);
-const [leaderboard, setLeaderboard] = useState();
 
   const [changeClass, setChangeClass] = useState(null);
   const [a, setA] = useState();
   const [search, setSearch] = useState("");
-  let { items, requestSort, sortConfig } = useSortableData(props.products);
+  let { items, requestSort, sortConfig } = useSortableData(products[0]);
   const ITEMS_PER_PAGE = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
@@ -58,61 +65,8 @@ const [leaderboard, setLeaderboard] = useState();
 
   const [isActive, setIsActive] = useState(false);
 
-  //   const handleClick = event => {
-  //     // 👇️ toggle isActive state on click
-  //     setIsActive(current => !current);
-  //   };
-
-  const handleClick = (event) => {
-    setIsActive((current) => !current);
-  };
-
-  useEffect(() => {
-    requestSort("daily")
-  }, [])
-  const apis = async() => {
-    await fetch(
-      "https://ca-signalsleaderboard-dev.orangedesert-af9d2c45.westeurope.azurecontainerapps.io/LeaderboardApi/GetLeaderboards",
-      {
-        mode: "no-cors",
-        method: "GET",
-        headers: {
-          "Access-Control-Allow-Origin": "http://localhost:3000/",
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data,"aa");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-      console.log(leaderboard);
-    // fetch(
-    //   "https://ca-signalsleaderboard-dev.orangedesert-af9d2c45.westeurope.azurecontainerapps.io/LeaderboardApi/GetLeadersWithPositions",
-    //   {
-    //     mode: "no-cors",
-    //     method: "GET",
-    //     dataType: "json",
-    //     headers: {
-    //       "Access-Control-Allow-Origin": "*",
-    //       "Content-Type": "multipart/form-data",
-    //     },
-    //   }
-    // )
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
-  };
-
   useEffect(() => {
     getdummy();
-    apis();
   }, [currentPage]);
 
   const getdummy = () => {
@@ -136,296 +90,382 @@ const [leaderboard, setLeaderboard] = useState();
     } else {
       setLoadmore(loadmores + 1);
     }
-    console.log("test1");
     console.log(loadmores, totalPages);
   };
   const loadless = () => {
-    if (loadmores != 1) {
-      setLoadmore(loadmores - 1);
-      console.log(loadmores, totalPages);
-    }
+    // if (loadmores != 1) {
+    //   setLoadmore(loadmores - 1);
+    //   console.log(loadmores, totalPages);
+    // }
   };
+  const settolocal = (e) => {
+    console.log(e.target.value);
+    localStorage.setItem("sorttype", JSON.stringify(e.target.value));
+  };
+
   return (
     <>
-      <div className="container">
-        <div className="head_flex">
-          <div className="table_heading">
-            <div className="t-headin1">
-              <h3>Leaderboard</h3>
+      {products ? (
+        <div className="container">
+          <div className="head_flex">
+            <div className="table_heading">
+              <div className="t-headin1">
+                <h3>Leaderboard</h3>
+              </div>
+              <div className="t-headin1">
+                <img src={leadericon} alt="" className="head-img" />
+                <img src={leadericon1} alt="" className="head-img1" />
+              </div>
             </div>
-            <div className="t-headin1">
-              <img src={leadericon} alt="" className="head-img" />
-              <img src={leadericon1} alt="" className="head-img1" />
-            </div>
-          </div>
 
-          <div className="table_top">
-            <div className="table_top_a">
-              <div className="table_top_sort">
-                <label htmlFor="sortby" className="label_sort">
-                  Sort by
-                </label>
-                {/* <select name="sortby" className='select_sort' >
+            <div className="table_top">
+              <div className="table_top_a">
+                <div className="table_top_sort">
+                  <label htmlFor="sortby" className="label_sort">
+                    Sort by
+                  </label>
+                  {/* <select name="sortby" className='select_sort' >
                                     <option value="" disabled selected>Select</option>
                                     <option value="">% ROI</option>
                                     <option value="">$ PNL</option>
 
                                 </select> */}
-                <div class="select">
-                  <select name="sortby" id="format">
-                    {/* <option selected disabled>Select</option> */}
-                    <option value="">% ROI</option>
-                    <option value="">$ PNL</option>
-                  </select>
+                  <div class="select">
+                    <select name="sortby" onChange={changeState} id="format">
+                      {/* <option selected disabled>Select</option> */}
+                      <option value="ROI">% ROI</option>
+                      <option value="PNL">$ PNL</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
 
-              <div className="table_top_time">
-                <label htmlFor="time" className="label_time">
-                  Time
-                </label>
-                {/* <select name="time" className='select_time' onChange={(e) => { requestSort(e.target.value) }}>
+                <div className="table_top_time">
+                  <label htmlFor="time" className="label_time">
+                    Time
+                  </label>
+                  {/* <select name="time" className='select_time' onChange={(e) => { requestSort(e.target.value) }}>
                                     <option value="" disabled selected>Select</option>
                                     <option value="daily">Daily</option>
                                     <option value="weekly">Weekly</option>
                                     <option value="monthly">Monthly</option>
                                     <option value="alltime">All</option>
                                 </select> */}
-                <div class="select">
-                  <select
-                    name="time"
-                    id="format"
-                    onChange={(e) => {
-                      requestSort(e.target.value);
-                    }}
-                  >
-                    {/* <option selected disabled>Select</option> */}
-                    <option value="daily">Daily</option>
-                    <option value="weekly">Weekly</option>
-                    <option value="monthly">Monthly</option>
-                    <option value="alltime">All</option>
-                  </select>
+                  <div class="select">
+                    <select
+                      name="time"
+                      id="format"
+                      onChange={changeStateperiod}
+                    >
+                      {/* <option selected disabled>Select</option> */}
+                      <option name="daily" value="dailyROI">
+                        Daily
+                      </option>
+                      <option name="weekly" value="weeklyROI">
+                        Weekly
+                      </option>
+                      <option name="monthly" value="monthlyROI">
+                        Monthly
+                      </option>
+                      <option name="all" value="allROI">
+                        All
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div className="table_top_search">
+                <input
+                  type="search"
+                  placeholder="Search by Tradername"
+                  className="w-25 form-control input_search"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+                <div className="icon_search">
+                  <i class="fa fa-search searchicon" aria-hidden="true"></i>
                 </div>
               </div>
             </div>
-            <div className="table_top_search">
-              <input
-                type="search"
-                placeholder="Search by Tradername"
-                className="w-25 form-control input_search"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-              <div className="icon_search">
-                <i class="fa fa-search searchicon" aria-hidden="true"></i>
-              </div>
+          </div>
+
+          <div className="media_table">
+            <div className="table_res">
+              <table
+                cellspacing="10"
+                cellpadding="0"
+                class="table table-hover  media_table"
+              >
+                <thead>
+                  <tr>
+                    <th className="head_sno" style={{ width: "0%" }}>
+                      #
+                    </th>
+                    <th className="head_trader">
+                      {" "}
+                      <button
+                        type="button"
+                        onClick={() => requestSort("nickName")}
+                        className={getClassNamesFor("nickName")}
+                      >
+                        Trader
+                      </button>
+                    </th>
+                    <th className="head_daily">
+                      <button
+                        type="button"
+                        onClick={() => requestSort("dailyROI")}
+                        className={getClassNamesFor("dailyROI")}
+                      >
+                        Daily
+                      </button>
+                    </th>
+                    <th className="head_weekly">
+                      <button
+                        type="button"
+                        onClick={() => requestSort("weeklyROI")}
+                        className={getClassNamesFor("weeklyROI")}
+                      >
+                        Weekly
+                      </button>
+                    </th>
+                    <th className="head_monthy">
+                      {" "}
+                      <button
+                        type="button"
+                        onClick={() => requestSort("monthlyROI")}
+                        className={getClassNamesFor("monthlyROI")}
+                      >
+                        Monthly
+                      </button>
+                    </th>
+                    <th className="head_alltime">
+                      <button
+                        type="button"
+                        onClick={() => requestSort("allROI")}
+                        className={getClassNamesFor("allROI")}
+                      >
+                        All Time
+                      </button>
+                    </th>
+                    <th className="head_follower">
+                      <button
+                        type="button"
+                        onClick={() => requestSort("followers")}
+                        className={getClassNamesFor("followers")}
+                      >
+                        Follower
+                      </button>{" "}
+                    </th>
+                    <th className="head_openposition">
+                      <button
+                        type="button"
+                        onClick={() => requestSort("position")}
+                        className={getClassNamesFor("position")}
+                      >
+                        Position
+                      </button>
+                    </th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody className="ctt">
+                  {items
+                    .slice(0, loadmores * ITEMS_PER_PAGE)
+                    .filter((value) => {
+                      return (
+                        ` ${value.nickName} 
+                      `
+                          // ${value.daily} ${value.weekly} ${value.monthly} ${value.alltime} ${value.follower}${value.openposition}
+                          .toLowerCase()
+                          .match(search.toLowerCase())
+                      );
+                    })
+                    .map((items, index) => {
+                      //  setA(items.length)
+                      //  setC(a+b)
+                      //  setB(a)
+
+                      //   setA(index)
+                      // console.log(items.dailyROI);
+                      return (
+                        <tr key={index} className="sub-body">
+                          <td className="body_sno">
+                            {currentPage <= 1
+                              ? index + 1
+                              : index + 1 + ITEMS_PER_PAGE * (currentPage - 1)}
+                          </td>
+
+                          <td className="body_trader">
+                            {items.userPhotoUrl ? (
+                              <img
+                                src={items.userPhotoUrl}
+                                alt=""
+                                className="trader_img"
+                              />
+                            ) : (
+                              <p className="trader_img"></p>
+                            )}
+                            {items.nickName}
+                          </td>
+
+                          <td className="body_profitloss">
+                            {items.dailyROI && items.dailyROI ? (
+                              <h6
+                                className={
+                                  items.dailyROI > 0 ? "" : "color_red "
+                                }
+                              >
+                                {items.dailyROI > 0
+                                  ? `+${items.dailyROI.toLocaleString("en-US", {
+                                      valute: "USD",
+                                    })}%`
+                                  : `${items.dailyROI.toLocaleString("en-US", {
+                                      valute: "USD",
+                                    })}%`}
+                              </h6>
+                            ) : (
+                              <h6>&nbsp; 0%</h6>
+                            )}
+
+                            {items.dailyPNL && items.dailyPNL ? (
+                              <p>{`≈ $${items.dailyPNL.toLocaleString("en-US", {
+                                valute: "USD",
+                              })}`}</p>
+                            ) : (
+                              <p>≈$0</p>
+                            )}
+                          </td>
+
+                          <td className="body_trades">
+                            {items.weeklyROI && items.weeklyROI ? (
+                              <h6
+                                className={
+                                  items.weeklyROI > 0 ? "" : "color_red"
+                                }
+                              >
+                                {items.weeklyROI > 0
+                                  ? `+${items.weeklyROI.toLocaleString(
+                                      "en-US",
+                                      {
+                                        valute: "USD",
+                                      }
+                                    )}%`
+                                  : `${items.weeklyROI.toLocaleString("en-US", {
+                                      valute: "USD",
+                                    })}%`}
+                              </h6>
+                            ) : (
+                              <h6>&nbsp;0%</h6>
+                            )}
+                            {items.weeklyPNL && items.weeklyPNL ? (
+                              <p>{`≈ $${items.weeklyPNL.toLocaleString(
+                                "en-US",
+                                {
+                                  valute: "USD",
+                                }
+                              )}`}</p>
+                            ) : (
+                              <p>≈$0</p>
+                            )}
+                          </td>
+
+                          <td className="body_traderequity color_red">
+                            {items.monthlyROI && items.monthlyROI ? (
+                              <h6
+                                className={
+                                  items.monthlyROI > 0 ? "" : "color_red"
+                                }
+                              >
+                                {items.monthlyROI > 0
+                                  ? `+${items.monthlyROI.toLocaleString(
+                                      "en-US",
+                                      {
+                                        valute: "USD",
+                                      }
+                                    )}%`
+                                  : `${items.monthlyROI.toLocaleString(
+                                      "en-US",
+                                      {
+                                        valute: "USD",
+                                      }
+                                    )}%`}
+                              </h6>
+                            ) : (
+                              <h6> &nbsp;0%</h6>
+                            )}
+                            {items.monthlyPNL && items.monthlyPNL ? (
+                              <p>{`≈ $${items.monthlyPNL.toLocaleString(
+                                "en-US",
+                                {
+                                  valute: "USD",
+                                }
+                              )}`}</p>
+                            ) : (
+                              <p>$0</p>
+                            )}
+                          </td>
+
+                          <td className="body_followerequity">
+                            {items.allROI && items.allROI ? (
+                              <h6
+                                className={items.allROI > 0 ? "" : "color_red"}
+                              >
+                                {items.allROI > 0
+                                  ? `+${items.allROI.toLocaleString("en-US", {
+                                      valute: "USD",
+                                    })}%`
+                                  : `${items.allROI.toLocaleString("en-US", {
+                                      valute: "USD",
+                                    })}%`}
+                              </h6>
+                            ) : (
+                              <h6> &nbsp;0%</h6>
+                            )}
+                            {items.allPNL && items.allPNL ? (
+                              <p>{`≈ $${items.allPNL.toLocaleString("en-US", {
+                                valute: "USD",
+                              })}`}</p>
+                            ) : (
+                              <p>$0</p>
+                            )}
+                          </td>
+
+                          <td className="body_follower">
+                            {items.followers
+                              ? `${items.followers.toLocaleString("en-US", {
+                                  valute: "USD",
+                                })}`
+                              : 0}
+                          </td>
+
+                          <td className="body_openposition">
+                            {items.position ? items.position : ""}
+                          </td>
+                          <td className="body_follow">
+                            <input
+                              type="button"
+                              value="+ Follow"
+                              className="btn btn-primary"
+                              onClick={(e) => {
+                                if (e.target.value == "+ Follow") {
+                                  e.target.value = "- Unfollow";
+                                } else {
+                                  e.target.value = "+ Follow";
+                                }
+                              }}
+                            />
+                          </td>
+                          {/* <Desbtn/> */}
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </table>
             </div>
-          </div>
-        </div>
 
-        <div className="media_table">
-          <div className="table_res">
-            <table
-              cellspacing="10"
-              cellpadding="0"
-              class="table table-hover  media_table"
-            >
-              <thead>
-                <tr>
-                  <th className="head_sno" style={{width:"0%"}}>#</th>
-                  <th className="head_trader">
-                    {" "}
-                    <button
-                      type="button"
-                      onClick={() => requestSort("trader")}
-                      className={getClassNamesFor("trader")}
-                    >
-                      Trader
-                    </button>
-                  </th>
-                  <th className="head_daily">
-                    <button
-                      type="button"
-                      onClick={() => requestSort("daily")}
-                      className={getClassNamesFor("daily")}
-                    >
-                      Daily
-                    </button>
-                  </th>
-                  <th className="head_weekly">
-                    <button
-                      type="button"
-                      onClick={() => requestSort("weekly")}
-                      className={getClassNamesFor("weekly")}
-                    >
-                      Weekly
-                    </button>
-                  </th>
-                  <th className="head_monthy">
-                    {" "}
-                    <button
-                      type="button"
-                      onClick={() => requestSort("monthly")}
-                      className={getClassNamesFor("monthly")}
-                    >
-                      Monthly
-                    </button>
-                  </th>
-                  <th className="head_alltime">
-                    <button
-                      type="button"
-                      onClick={() => requestSort("alltime")}
-                      className={getClassNamesFor("alltime")}
-                    >
-                      All Time
-                    </button>
-                  </th>
-                  <th className="head_follower">
-                    <button
-                      type="button"
-                      onClick={() => requestSort("follower")}
-                      className={getClassNamesFor("follower")}
-                    >
-                      Follower
-                    </button>{" "}
-                  </th>
-                  <th className="head_openposition">
-                    <button
-                      type="button"
-                      onClick={() => requestSort("openposition")}
-                      className={getClassNamesFor("openposition")}
-                    >
-                      Position
-                    </button>
-                  </th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody className="ctt">
-                {items
-                  .slice(0, loadmores * ITEMS_PER_PAGE)
-                  .filter((value) => {
-                    return ` ${value.trader} ${value.daily} ${value.weekly} ${value.monthly} ${value.alltime} ${value.follower}${value.openposition} `
-                      .toLowerCase()
-                      .match(search.toLowerCase());
-                  })
-                  .map((items, index) => {
-                    //  setA(items.length)
-                    //  setC(a+b)
-                    //  setB(a)
-
-                    //   setA(index)
-                    return (
-                      <tr key={index} className="sub-body">
-                        <td className="body_sno">
-                          {currentPage <= 1
-                            ? index + 1
-                            : index + 1 + ITEMS_PER_PAGE * (currentPage - 1)}
-                        </td>
-
-                        <td className="body_trader">
-                          <img
-                            src={items.picture}
-                            alt=""
-                            className="trader_img"
-                          />
-                          {items.trader}
-                        </td>
-
-                        <td className="body_profitloss">
-                          <h6 className={items.daily > 0 ? "" : "color_red "}>
-                            {items.daily > 0
-                              ? `+${items.daily.toLocaleString("en-US", {
-                                  valute: "USD",
-                                })}%`
-                              : `${items.daily.toLocaleString("en-US", {
-                                  valute: "USD",
-                                })}%`}
-                          </h6>
-                          <p>{`≈ $${items.dailyA.toLocaleString("en-US", {
-                            valute: "USD",
-                          })}`}</p>
-                        </td>
-
-                        <td className="body_trades">
-                          <h6 className={items.weekly > 0 ? "" : "color_red"}>
-                            {items.weekly > 0
-                              ? `+${items.weekly.toLocaleString("en-US", {
-                                  valute: "USD",
-                                })}%`
-                              : `${items.weekly.toLocaleString("en-US", {
-                                  valute: "USD",
-                                })}%`}
-                          </h6>
-                          <p>{`≈ $${items.weeklyA.toLocaleString("en-US", {
-                            valute: "USD",
-                          })}`}</p>
-                        </td>
-
-                        <td className="body_traderequity color_red">
-                          <h6 className={items.monthly > 0 ? "" : "color_red"}>
-                            {items.monthly > 0
-                              ? `+${items.monthly.toLocaleString("en-US", {
-                                  valute: "USD",
-                                })}%`
-                              : `${items.monthly.toLocaleString("en-US", {
-                                  valute: "USD",
-                                })}%`}
-                          </h6>
-                          <p>{`≈ $${items.monthlyA.toLocaleString("en-US", {
-                            valute: "USD",
-                          })}`}</p>
-                        </td>
-
-                        <td className="body_followerequity">
-                          <h6 className={items.alltime > 0 ? "" : "color_red"}>
-                            {items.alltime > 0
-                              ? `+${items.alltime.toLocaleString("en-US", {
-                                  valute: "USD",
-                                })}%`
-                              : `${items.alltime.toLocaleString("en-US", {
-                                  valute: "USD",
-                                })}%`}
-                          </h6>
-                          <p>{`≈ $${items.alltimeA.toLocaleString("en-US", {
-                            valute: "USD",
-                          })}`}</p>
-                        </td>
-
-                        <td className="body_follower">{`${items.follower.toLocaleString(
-                          "en-US",
-                          { valute: "USD" }
-                        )}`}</td>
-
-                        <td className="body_openposition">
-                          {items.openposition}
-                        </td>
-
-                        <td className="body_follow">
-                          <input
-                            type="button"
-                            value="+ Follow"
-                            className="btn btn-primary"
-                            onClick={(e) => {
-                              if (e.target.value == "+ Follow") {
-                                e.target.value = "- Unfollow";
-                              } else {
-                                e.target.value = "+ Follow";
-                              }
-                            }}
-                          />
-                        </td>
-                        {/* <Desbtn/> */}
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </table>
-          </div>
-
-          <div className="pagination_btm">
-            <div className="btm_p">
-              {/* <p>
+            <div className="pagination_btm">
+              <div className="btm_p">
+                {/* <p>
                 Showing{" "}
                 {currentPage <= 1
                   ? `1 - ${a}`
@@ -434,13 +474,16 @@ const [leaderboard, setLeaderboard] = useState();
                     }`}{" "}
                 of {items.length}
               </p> */}
-              {loadmores == totalPages?(""):(  <button className="btn loadmore" onClick={loadmore}>
-                Load more
-              </button>)}
-            
+                {loadmores == totalPages ? (
+                  ""
+                ) : (
+                  <button className="btn loadmore" onClick={loadmore}>
+                    Load more
+                  </button>
+                )}
+              </div>
             </div>
-          </div>
-          {/* <div onClick={getdummy}>
+            {/* <div onClick={getdummy}>
                 
                <Pagination
                 currentPage={currentPage}
@@ -448,49 +491,62 @@ const [leaderboard, setLeaderboard] = useState();
                 handlePageChange={(page) => setCurrentPage(page)}
               /> 
             </div> */}
-        </div>
-        <div className="media_Body">
-          {items
-            .slice(0, loadmores * ITEMS_PER_PAGE)
-            .filter((value) => {
-              return ` ${value.trader} ${value.daily} ${value.weekly} ${value.monthly} ${value.alltime} ${value.follower}${value.openposition} `
-                .toLowerCase()
-                .match(search.toLowerCase());
-            })
-            .map((items, index) => {
-              return (
-                <>
-                  <div className="flex_body">
-                    <div key={index} className="media_content">
-                      <div className="firstLine">
-                        <div
-                          className="line_a"
-                          onClick={() => requestSort("trader")}
-                        >
-                          <img
-                            src={items.picture}
-                            alt=""
-                            className="trader_img"
-                          />
-                          <span>{items.trader}</span>
-                        </div>
-                        <div className="firstline_a">
-                          <h6 onClick={() => requestSort("follower")}>
-                            Follower
-                          </h6>
-                          <p>
-                            {items.follower.toLocaleString("en-US", {
-                              valute: "USD",
-                            })}
-                          </p>
-                        </div>
-                        <div className="firstline_b">
-                          <h6 onClick={() => requestSort("openposition")}>
-                            Open Position
-                          </h6>
-                          <p>{items.openposition}</p>
-                        </div>
-                        {/* <div className="media_btn" onclick="addClass()"><input type="button"  id={index} value="+" onClick={(e) => {
+          </div>
+          {/* media  */}
+          <div className="media_Body">
+            {items
+              .slice(0, loadmores * ITEMS_PER_PAGE)
+              .filter((value) => {
+                return (
+                  ` ${value.nickName} 
+                `
+                    // ${value.daily} ${value.weekly} ${value.monthly} ${value.alltime} ${value.follower}${value.openposition}
+                    .toLowerCase()
+                    .match(search.toLowerCase())
+                );
+              })
+              .map((items, index) => {
+                return (
+                  <>
+                    <div className="flex_body">
+                      <div key={index} className="media_content">
+                        <div className="firstLine">
+                          <div
+                            className="line_a"
+                            onClick={() => requestSort("nickName")}
+                          >
+                            {items.userPhotoUrl ? (
+                              <img
+                                src={items.userPhotoUrl}
+                                alt=""
+                                className="trader_img"
+                              />
+                            ) : (
+                              <p className="trader_img"></p>
+                            )}
+                            <span>{items.nickName}</span>
+                          </div>
+                          <div className="firstline_a">
+                            <h6 onClick={() => requestSort("follower")}>
+                              Follower
+                            </h6>
+                            {items.followers && items.followers ? (
+                              <p>
+                                {items.followers.toLocaleString("en-US", {
+                                  valute: "USD",
+                                })}
+                              </p>
+                            ) : (
+                              <p>0</p>
+                            )}
+                          </div>
+                          <div className="firstline_b">
+                            <h6 onClick={() => requestSort("position")}>
+                              Open Position
+                            </h6>
+                            <p> {items.position ? items.position : ""}</p>
+                          </div>
+                          {/* <div className="media_btn" onclick="addClass()"><input type="button"  id={index} value="+" onClick={(e) => {
                                                     if (e.target.value == "-") {
                                                         e.target.value = "+"
 
@@ -498,98 +554,155 @@ const [leaderboard, setLeaderboard] = useState();
                                                     else {
                                                         e.target.value = "-"
 
-
                                                     }
                                                 }} /></div> */}
-                        <Mobbtn />
+                          <Mobbtn />
 
-                        {/* <button className={isActive ? 'bnnerbtn' : 'hidebtn'} onClick={handleClick} id={index}  ></button> */}
-                      </div>
-                      <div className="secondline">
-                        <div className="secondline_a">
-                          <h5 onClick={() => requestSort("daily")}>Daily</h5>
-                          <div>
-                            <h6 className={items.daily > 0 ? "" : "color_red "}>
-                              {items.daily > 0
-                                ? `+${items.daily.toLocaleString("en-US", {
-                                    valute: "USD",
-                                  })}%`
-                                : `${items.daily.toLocaleString("en-US", {
-                                    valute: "USD",
-                                  })}%`}
-                            </h6>
-                            <p>{`≈ $${items.dailyA}`}</p>
-                          </div>
+                          {/* <button className={isActive ? 'bnnerbtn' : 'hidebtn'} onClick={handleClick} id={index}  ></button> */}
                         </div>
-                        <div className="secondline_b">
-                          <h5 onClick={() => requestSort("weekly")}>Weekly</h5>
-                          <div>
-                            <h6
-                              className={items.weekly > 0 ? "" : "color_red "}
-                            >
-                              {items.weekly > 0
-                                ? `+${items.weekly.toLocaleString("en-US", {
-                                    valute: "USD",
-                                  })}%`
-                                : `${items.weekly.toLocaleString("en-US", {
-                                    valute: "USD",
-                                  })}%`}
-                            </h6>
-                            <p>{`≈ $${items.weeklyA}`}</p>
+                        <div className="secondline">
+                          <div className="secondline_a">
+                            <h5 onClick={() => requestSort("dailyROI")}>
+                              Daily
+                            </h5>
+                            <div>
+                              {items.dailyROI && items.dailyROI ? (
+                                <h6
+                                  className={
+                                    items.dailyROI > 0 ? "" : "color_red "
+                                  }
+                                >
+                                  {items.dailyROI > 0
+                                    ? `+${items.dailyROI.toLocaleString(
+                                        "en-US",
+                                        {
+                                          valute: "USD",
+                                        }
+                                      )}%`
+                                    : `${items.dailyROI.toLocaleString(
+                                        "en-US",
+                                        {
+                                          valute: "USD",
+                                        }
+                                      )}%`}
+                                </h6>
+                              ) : (
+                                <h6>&nbsp; 0%</h6>
+                              )}
+                              {items.dailyPNL && items.dailyPNL ? (
+                                <p>{`≈ $${items.dailyPNL}`}</p>
+                              ) : (
+                                <p>≈$0</p>
+                              )}
+                            </div>
                           </div>
-                        </div>
-                        <div className="secondline_c">
-                          <h5 onClick={() => requestSort("monthly")}>
-                            Monthly
-                          </h5>
-                          <div>
-                            <h6
-                              className={items.monthly > 0 ? "" : "color_red "}
-                            >
-                              {items.monthly > 0
-                                ? `+${items.monthly.toLocaleString("en-US", {
-                                    valute: "USD",
-                                  })}%`
-                                : `${items.monthly.toLocaleString("en-US", {
-                                    valute: "USD",
-                                  })}%`}
-                            </h6>
-                            <p>{`≈ $${items.monthlyA}`}</p>
+                          <div className="secondline_b">
+                            <h5 onClick={() => requestSort("weeklyROI")}>
+                              weeklyROI
+                            </h5>
+                            <div>
+                              {items.weeklyROI && items.weeklyROI ? (
+                                <h6
+                                  className={
+                                    items.weeklyROI > 0 ? "" : "color_red "
+                                  }
+                                >
+                                  {items.weeklyROI > 0
+                                    ? `+${items.weeklyROI.toLocaleString(
+                                        "en-US",
+                                        {
+                                          valute: "USD",
+                                        }
+                                      )}%`
+                                    : `${items.weeklyROI.toLocaleString(
+                                        "en-US",
+                                        {
+                                          valute: "USD",
+                                        }
+                                      )}%`}
+                                </h6>
+                              ) : (
+                                <h6>&nbsp;0%</h6>
+                              )}
+                              {items.weeklyPNL && items.weeklyPNL ? (
+                                <p>{`≈ $${items.weeklyPNL}`}</p>
+                              ) : (
+                                <p>≈$0</p>
+                              )}
+                            </div>
                           </div>
-                        </div>
-                        <div className="secondline_d">
-                          <h5 onClick={() => requestSort("alltime")}>
-                            All-time
-                          </h5>
-                          <div>
-                            <h6
-                              className={items.alltime > 0 ? "" : "color_red "}
-                            >
-                              {items.alltime > 0
-                                ? `+${items.alltime.toLocaleString("en-US", {
-                                    valute: "USD",
-                                  })}%`
-                                : `${items.alltime.toLocaleString("en-US", {
-                                    valute: "USD",
-                                  })}%`}
-                            </h6>
-                            <p>{`≈ $${items.alltimeA}`}</p>
+                          <div className="secondline_c">
+                            <h5 onClick={() => requestSort("monthlyROI")}>
+                              Monthly
+                            </h5>
+                            <div>
+                              {items.monthlyROI && items.monthlyROI ? (
+                                <h6
+                                  className={
+                                    items.monthlyROI > 0 ? "" : "color_red "
+                                  }
+                                >
+                                  {items.monthlyROI > 0
+                                    ? `+${items.monthlyROI.toLocaleString(
+                                        "en-US",
+                                        {
+                                          valute: "USD",
+                                        }
+                                      )}%`
+                                    : `${items.monthlyROI.toLocaleString(
+                                        "en-US",
+                                        {
+                                          valute: "USD",
+                                        }
+                                      )}%`}
+                                </h6>
+                              ) : (
+                                <h6> &nbsp;0%</h6>
+                              )}
+                              {items.monthlyPNL && items.monthlyPNL ? (
+                                <p>{`≈ $${items.monthlyPNL}`}</p>
+                              ) : (
+                                <p>$0</p>
+                              )}
+                            </div>
+                          </div>
+                          <div className="secondline_d">
+                            <h5 onClick={() => requestSort("allROI")}>
+                              All-time
+                            </h5>
+                            <div>
+                            {items.allROI && items.allROI ? (  <h6
+                                className={items.allROI > 0 ? "" : "color_red "}
+                              >
+                                {items.allROI > 0
+                                  ? `+${items.allROI.toLocaleString("en-US", {
+                                      valute: "USD",
+                                    })}%`
+                                  : `${items.allROI.toLocaleString("en-US", {
+                                      valute: "USD",
+                                    })}%`}
+                              </h6>):(  <h6> &nbsp;0%</h6>)}
+                              {items.allPNL && items.allPNL ? ( <p>{`≈ $${items.allPNL}`}</p>):( <p>$0</p>)}
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </>
-              );
-            })}
-          <div>
+                  </>
+                );
+              })}
             <div>
-              <p></p>
-            </div>
-            {loadmores == totalPages?(""):(  <button className="btn loadmore" onClick={loadmore}>
-                Load more
-              </button>)}
-            {/* <div className="pagination_btm">
+              <div>
+                <p></p>
+              </div>
+              {loadmores == totalPages ? (
+                ""
+              ) : (
+                <button className="btn loadmore" onClick={loadmore}>
+                  Load more
+                </button>
+              )}
+              {/* <div className="pagination_btm">
               <div className="btm_p">
                 <p>
                   Showing{" "}
@@ -607,423 +720,54 @@ const [leaderboard, setLeaderboard] = useState();
                 handlePageChange={(page) => setCurrentPage(page)}
               />
             </div> */}
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
     </>
   );
 };
 
 export const ProductSort1 = () => {
+  const [sortType, setsortType] = useState("ROI");
+  const [periodType, setperiodType] = useState("Daily");
+  useEffect(() => {
+    apis();
+  }, [sortType, periodType]);
+
+  const [leaderboard, setLeaderboard] = useState();
+  const apis = async (e) => {
+    const data = await axios(
+      `https://ca-signalsleaderboard-dev.orangedesert-af9d2c45.westeurope.azurecontainerapps.io/LeaderboardApi/GetLeaderboard?sortType=${sortType}&periodType=${periodType}`
+    );
+    setLeaderboard(data.data.entries);
+  };
+  console.log(leaderboard);
+  const changeState = (e) => {
+    const value = e.target.value;
+    setsortType(value);
+  };
+  const changeStateperiod = (e) => {
+    let value = e.target.value;
+    value = value.substring(0, value.length - 3);
+    setperiodType(value);
+  };
+  console.log(leaderboard);
+
   return (
     <>
       <div className="product-sortss">
         <div className="container">
-          <ProductTable
-            products={[
-              {
-                id: 1,
-                trader: "Jone",
-                picture:
-                  "https://assets-17app.akamaized.net/THUMBNAIL_525BEE6E-94B5-4C7F-AB47-1A6F9735EE82.jpg",
-
-                daily: 577.06,
-                dailyA: 35267.84,
-                weekly: 545.89,
-                weeklyA: 15237.21,
-                monthly: 895.54,
-                monthlyA: 12123.45,
-                alltime: 212.5,
-                alltimeA: 11895.12,
-                follower: 344,
-                openposition: 46,
-              },
-              {
-                id: 2,
-                trader: "Victoria",
-                picture:
-                  "https://assets-17app.akamaized.net/THUMBNAIL_8390066D-46E4-4741-968D-9FF84B276B52.jpg",
-                daily: -347.06,
-                dailyA: 20550.34,
-                weekly: 212.5,
-                weeklyA: 11895.12,
-                monthly: 545.54,
-                monthlyA: 20556.78,
-                alltime: 256.23,
-                alltimeA: 30008.81,
-                follower: 1500,
-                openposition: 12,
-              },
-              {
-                id: 3,
-                trader: "Joy",
-                picture:
-                  "https://assets-17app.akamaized.net/THUMBNAIL_CE9F51C5-7006-4DE6-9059-9AEA98F7DF13.jpg",
-                daily: 197.06,
-                dailyA: 15237.34,
-
-                weekly: 895.5,
-                weeklyA: 30569.81,
-
-                monthly: 256.54,
-                monthlyA: 12123.78,
-
-                alltime: -577.06,
-                alltimeA: 15237.12,
-
-                follower: 3699,
-                openposition: 23,
-              },
-              {
-                id: 4,
-                trader: "Quinn",
-                picture:
-                  "https://assets-17app.akamaized.net/THUMBNAIL_2A847B03-7BE8-4645-B62A-07201A90EDEF.jpg",
-                daily: 211.06,
-                dailyA: 11895.34,
-
-                weekly: 347.06,
-                weeklyA: 23847.84,
-
-                monthly: 256.54,
-                monthlyA: 12123.78,
-
-                alltime: 895.67,
-                alltimeA: 11237.12,
-
-                follower: 8975,
-
-                openposition: 56,
-              },
-              {
-                id: 5,
-                trader: "Sheenalo",
-                picture:
-                  "https://assets-17app.akamaized.net/THUMBNAIL_95D163ED-6BF8-4D09-897C-B2E5320BE462.jpg",
-                daily: 895.54,
-                dailyA: 30654.34,
-
-                weekly: 256.23,
-                weeklyA: 12123.84,
-
-                monthly: 455.54,
-                monthlyA: 56586.78,
-
-                alltime: 347.06,
-                alltimeA: 30569.81,
-
-                follower: 4569999,
-
-                openposition: 42,
-              },
-              {
-                id: 6,
-                trader: "Charlene",
-                picture:
-                  "https://assets-17app.akamaized.net/THUMBNAIL_a943a748-16c8-4afa-87a6-8b6ac0e1f47a.jpg",
-                daily: 545.89,
-                dailyA: 20556.34,
-
-                weekly: 577.06,
-                weeklyA: 35286.7,
-
-                monthly: 895.54,
-                monthlyA: 35589.78,
-
-                alltime: 812.46,
-                alltimeA: 23569.81,
-
-                follower: 459,
-
-                openposition: 25,
-              },
-              {
-                id: 7,
-                trader: "LeonaBaby",
-                picture:
-                  "https://assets-17app.akamaized.net/THUMBNAIL_B850B9FF-E1FD-4DFA-8737-E67E32B71B8B.jpg",
-                daily: 256.54,
-                dailyA: 12123.34,
-
-                weekly: 895.47,
-                weeklyA: 30569.84,
-
-                monthly: 347.06,
-                monthlyA: 12123.78,
-
-                alltime: 256.06,
-                alltimeA: 12123.81,
-
-                follower: 698,
-
-                openposition: 34,
-              },
-              {
-                id: 8,
-                trader: "Sunny",
-                picture:
-                  "https://assets-17app.akamaized.net/THUMBNAIL_1A36F357-6EA2-4C77-B26F-588319F26EF2.jpg",
-                daily: 455.54,
-                dailyA: 56654.34,
-
-                weekly: 256.23,
-                weeklyA: 12123.84,
-
-                monthly: 197.54,
-                monthlyA: 15586.78,
-
-                alltime: 577.06,
-                alltimeA: 35569.81,
-
-                follower: 7855,
-
-                openposition: 30,
-              },
-              {
-                id: 9,
-                trader: "ImWord",
-                picture:
-                  "https://assets-17app.akamaized.net/THUMBNAIL_4f761f7d-0b85-45dd-90ad-1444c548abd6.jpg",
-                daily: 895.54,
-                dailyA: 35654.34,
-
-                weekly: 197.23,
-                weeklyA: 35123.84,
-
-                monthly: 212.54,
-                monthlyA: 11586.78,
-
-                alltime: 989.06,
-                alltimeA: 23569.81,
-
-                follower: 256,
-
-                openposition: 12,
-              },
-              {
-                id: 10,
-                trader: "Dophine",
-                picture:
-                  "https://assets-17app.akamaized.net/THUMBNAIL_59946513-FC72-4444-8CC9-991BFFF19C22.jpg",
-                daily: 256.54,
-                dailyA: 45654.34,
-
-                weekly: -895.23,
-                weeklyA: 20123.84,
-
-                monthly: 256.54,
-                monthlyA: 56586.78,
-
-                alltime: 589.06,
-                alltimeA: 32569.81,
-
-                follower: 6988,
-
-                openposition: 56,
-              },
-
-              {
-                id: 1,
-                trader: "Jone",
-                picture:
-                  "https://assets-17app.akamaized.net/THUMBNAIL_525BEE6E-94B5-4C7F-AB47-1A6F9735EE82.jpg",
-
-                daily: 577.06,
-                dailyA: 35267.84,
-                weekly: 545.89,
-                weeklyA: 15237.21,
-                monthly: 895.54,
-                monthlyA: 12123.45,
-                alltime: 212.5,
-                alltimeA: 11895.12,
-                follower: 344,
-                openposition: 46,
-              },
-              {
-                id: 2,
-                trader: "Victoria",
-                picture:
-                  "https://assets-17app.akamaized.net/THUMBNAIL_8390066D-46E4-4741-968D-9FF84B276B52.jpg",
-                daily: 347.06,
-                dailyA: 20550.34,
-                weekly: 212.5,
-                weeklyA: 11895.12,
-                monthly: 545.54,
-                monthlyA: 20556.78,
-                alltime: 256.23,
-                alltimeA: 30008.81,
-                follower: 1500,
-                openposition: 12,
-              },
-              {
-                id: 3,
-                trader: "Joy",
-                picture:
-                  "https://assets-17app.akamaized.net/THUMBNAIL_CE9F51C5-7006-4DE6-9059-9AEA98F7DF13.jpg",
-                daily: 197.06,
-                dailyA: 15237.34,
-
-                weekly: 895.5,
-                weeklyA: 30569.81,
-
-                monthly: 256.54,
-                monthlyA: 12123.78,
-
-                alltime: 577.06,
-                alltimeA: 15237.12,
-
-                follower: 3699,
-                openposition: 23,
-              },
-              {
-                id: 4,
-                trader: "Quinn",
-                picture:
-                  "https://assets-17app.akamaized.net/THUMBNAIL_2A847B03-7BE8-4645-B62A-07201A90EDEF.jpg",
-                daily: 211.06,
-                dailyA: 11895.34,
-
-                weekly: 347.06,
-                weeklyA: 23847.84,
-
-                monthly: 256.54,
-                monthlyA: 12123.78,
-
-                alltime: 895.67,
-                alltimeA: 11237.12,
-
-                follower: 8975,
-
-                openposition: 56,
-              },
-              {
-                id: 5,
-                trader: "Sheenalo",
-                picture:
-                  "https://assets-17app.akamaized.net/THUMBNAIL_95D163ED-6BF8-4D09-897C-B2E5320BE462.jpg",
-                daily: 895.54,
-                dailyA: 30654.34,
-
-                weekly: 256.23,
-                weeklyA: 12123.84,
-
-                monthly: 455.54,
-                monthlyA: 56586.78,
-
-                alltime: 347.06,
-                alltimeA: 30569.81,
-
-                follower: 4569999,
-
-                openposition: 42,
-              },
-              {
-                id: 6,
-                trader: "Charlene",
-                picture:
-                  "https://assets-17app.akamaized.net/THUMBNAIL_a943a748-16c8-4afa-87a6-8b6ac0e1f47a.jpg",
-                daily: 545.89,
-                dailyA: 20556.34,
-
-                weekly: 577.06,
-                weeklyA: 35286.7,
-
-                monthly: 895.54,
-                monthlyA: 35589.78,
-
-                alltime: 812.46,
-                alltimeA: 23569.81,
-
-                follower: 459,
-
-                openposition: 25,
-              },
-              {
-                id: 7,
-                trader: "LeonaBaby",
-                picture:
-                  "https://assets-17app.akamaized.net/THUMBNAIL_B850B9FF-E1FD-4DFA-8737-E67E32B71B8B.jpg",
-                daily: 256.54,
-                dailyA: 12123.34,
-
-                weekly: 895.47,
-                weeklyA: 30569.84,
-
-                monthly: 347.06,
-                monthlyA: 12123.78,
-
-                alltime: 256.06,
-                alltimeA: 12123.81,
-
-                follower: 698,
-
-                openposition: 34,
-              },
-              {
-                id: 8,
-                trader: "Sunny",
-                picture:
-                  "https://assets-17app.akamaized.net/THUMBNAIL_1A36F357-6EA2-4C77-B26F-588319F26EF2.jpg",
-                daily: 455.54,
-                dailyA: 56654.34,
-
-                weekly: 256.23,
-                weeklyA: 12123.84,
-
-                monthly: 197.54,
-                monthlyA: 15586.78,
-
-                alltime: 577.06,
-                alltimeA: 35569.81,
-
-                follower: 7855,
-
-                openposition: 30,
-              },
-              {
-                id: 9,
-                trader: "ImWord",
-                picture:
-                  "https://assets-17app.akamaized.net/THUMBNAIL_4f761f7d-0b85-45dd-90ad-1444c548abd6.jpg",
-                daily: 895.54,
-                dailyA: 35654.34,
-
-                weekly: 197.23,
-                weeklyA: 35123.84,
-
-                monthly: 212.54,
-                monthlyA: 11586.78,
-
-                alltime: 989.06,
-                alltimeA: 23569.81,
-
-                follower: 256,
-
-                openposition: 12,
-              },
-              {
-                id: 10,
-                trader: "Dophine",
-                picture:
-                  "https://assets-17app.akamaized.net/THUMBNAIL_59946513-FC72-4444-8CC9-991BFFF19C22.jpg",
-                daily: 256.54,
-                dailyA: 45654.34,
-
-                weekly: 895.23,
-                weeklyA: 20123.84,
-
-                monthly: 256.54,
-                monthlyA: 56586.78,
-
-                alltime: 589.06,
-                alltimeA: 32569.81,
-
-                follower: 6988,
-
-                openposition: 56,
-              },
-            ]}
-          />
+          {leaderboard && (
+            <ProductTable
+              changeStateperiod={changeStateperiod}
+              changeState={changeState}
+              products={[leaderboard]}
+              periodType={periodType}
+            />
+          )}
         </div>
       </div>
     </>
