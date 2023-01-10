@@ -256,15 +256,7 @@ const ProductTable = ({
                         Follower
                       </button>{" "}
                     </th>
-                    <th className="head_openposition">
-                      <button
-                        type="button"
-                        onClick={() => requestSort("position")}
-                        className={getClassNamesFor("position")}
-                      >
-                        Position
-                      </button>
-                    </th>
+                   
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -442,9 +434,7 @@ const ProductTable = ({
                               : 0}
                           </td>
 
-                          <td className="body_openposition">
-                            {items.position ? items.position : ""}
-                          </td>
+                        
                           <td className="body_follow">
                             <input
                               type="button"
@@ -544,12 +534,7 @@ const ProductTable = ({
                               <p>0</p>
                             )}
                           </div>
-                          <div className="firstline_b">
-                            <h6 onClick={() => requestSort("position")}>
-                              Open Position
-                            </h6>
-                            <p> {items.position ? items.position : ""}</p>
-                          </div>
+                         
                           {/* <div className="media_btn" onclick="addClass()"><input type="button"  id={index} value="+" onClick={(e) => {
                                                     if (e.target.value == "-") {
                                                         e.target.value = "+"
