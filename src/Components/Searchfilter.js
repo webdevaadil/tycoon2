@@ -47,20 +47,20 @@ const ProductTable = ({
   products,
   changeStateperiod,
   periodType,
+  sortType,
 }) => {
   useEffect(() => {
-    console.log(periodType);
-    
-    let periodTypes= `${periodType}ROI`
-    requestSort(periodTypes);
-    getClassNamesFor(periodTypes);
-  }, [periodType]);
+    requestSort(`${periodType}${sortType}`);
+    getClassNamesFor(`${periodType}${sortType}`);
+    console.log(`${periodType}${sortType}`);
+  }, [periodType, changeState]);
   useEffect(() => {
-
-    
-   
     requestSort("dailyROI");
     getClassNamesFor("dailyROI");
+    if (sortType === "dailyPNL") {
+      requestSort("dailyPNL");
+      getClassNamesFor("dailyPNL");
+    }
   }, []);
 
   const [loadmores, setLoadmore] = useState(1);
@@ -71,7 +71,6 @@ const ProductTable = ({
   const ITEMS_PER_PAGE = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
-
 
   useEffect(() => {
     getdummy();
@@ -98,10 +97,7 @@ const ProductTable = ({
     } else {
       setLoadmore(loadmores + 1);
     }
-    console.log(loadmores, totalPages);
   };
-
-
 
   return (
     <>
@@ -124,12 +120,7 @@ const ProductTable = ({
                   <label htmlFor="sortby" className="label_sort">
                     Sort by
                   </label>
-                  {/* <select name="sortby" className='select_sort' >
-                                    <option value="" disabled selected>Select</option>
-                                    <option value="">% ROI</option>
-                                    <option value="">$ PNL</option>
 
-                                </select> */}
                   <div class="select">
                     <select name="sortby" onChange={changeState} id="format">
                       {/* <option selected disabled>Select</option> */}
@@ -143,30 +134,29 @@ const ProductTable = ({
                   <label htmlFor="time" className="label_time">
                     Time
                   </label>
-                  {/* <select name="time" className='select_time' onChange={(e) => { requestSort(e.target.value) }}>
-                                    <option value="" disabled selected>Select</option>
-                                    <option value="daily">Daily</option>
-                                    <option value="weekly">Weekly</option>
-                                    <option value="monthly">Monthly</option>
-                                    <option value="alltime">All</option>
-                                </select> */}
+
                   <div class="select">
                     <select
                       name="time"
                       id="format"
                       onChange={changeStateperiod}
                     >
-                      {/* <option selected disabled>Select</option> */}
-                      <option  value="dailyROI">
+                      <option
+                        value={sortType == "ROI" ? "dailyROI" : "dailyPNL"}
+                      >
                         Daily
                       </option>
-                      <option  value="weeklyROI">
+                      <option
+                        value={sortType == "ROI" ? "weeklyROI" : "weeklyPNL"}
+                      >
                         Weekly
                       </option>
-                      <option  value="monthlyROI">
+                      <option
+                        value={sortType == "ROI" ? "monthlyROI" : "monthlyPNL"}
+                      >
                         Monthly
                       </option>
-                      <option  value="allROI">
+                      <option value={sortType == "ROI" ? "allROI" : "allPNL"}>
                         All
                       </option>
                     </select>
@@ -213,8 +203,16 @@ const ProductTable = ({
                     <th className="head_daily">
                       <button
                         type="button"
-                        onClick={() => requestSort("dailyROI")}
-                        className={getClassNamesFor("dailyROI")}
+                        onClick={() =>
+                          sortType == "ROI"
+                            ? requestSort("dailyROI")
+                            : requestSort("dailyPNL")
+                        }
+                        className={
+                          sortType == "ROI"
+                            ? getClassNamesFor("dailyROI")
+                            : getClassNamesFor("dailyPNL")
+                        }
                       >
                         Daily
                       </button>
@@ -222,8 +220,16 @@ const ProductTable = ({
                     <th className="head_weekly">
                       <button
                         type="button"
-                        onClick={() => requestSort("weeklyROI")}
-                        className={getClassNamesFor("weeklyROI")}
+                        onClick={() =>
+                          sortType == "ROI"
+                            ? requestSort("weeklyROI")
+                            : requestSort("weeklyPNL")
+                        }
+                        className={
+                          sortType == "ROI"
+                            ? getClassNamesFor("weeklyROI")
+                            : getClassNamesFor("weeklyPNL")
+                        }
                       >
                         Weekly
                       </button>
@@ -232,8 +238,16 @@ const ProductTable = ({
                       {" "}
                       <button
                         type="button"
-                        onClick={() => requestSort("monthlyROI")}
-                        className={getClassNamesFor("monthlyROI")}
+                        onClick={() =>
+                          sortType == "ROI"
+                            ? requestSort("monthlyROI")
+                            : requestSort("monthlyPNL")
+                        }
+                        className={
+                          sortType == "ROI"
+                            ? getClassNamesFor("monthlyROI")
+                            : getClassNamesFor("monthlyPNL")
+                        }
                       >
                         Monthly
                       </button>
@@ -241,8 +255,16 @@ const ProductTable = ({
                     <th className="head_alltime">
                       <button
                         type="button"
-                        onClick={() => requestSort("allROI")}
-                        className={getClassNamesFor("allROI")}
+                        onClick={() =>
+                          sortType == "ROI"
+                            ? requestSort("allROI")
+                            : requestSort("allPNL")
+                        }
+                        className={
+                          sortType == "ROI"
+                            ? getClassNamesFor("allROI")
+                            : getClassNamesFor("allPNL")
+                        }
                       >
                         All Time
                       </button>
@@ -303,11 +325,7 @@ const ProductTable = ({
                                 className="trader_img"
                               />
                             ) : (
-                              <img
-                              src={dummy}
-                              alt=""
-                              className="trader_img"
-                            />
+                              <img src={dummy} alt="" className="trader_img" />
                             )}
                             {items.nickName}
                           </td>
@@ -566,7 +584,18 @@ const ProductTable = ({
                         </div>
                         <div className="secondline">
                           <div className="secondline_a">
-                            <h5 onClick={() => requestSort("dailyROI")}>
+                            <h5
+                              onClick={() =>
+                                sortType == "ROI"
+                                  ? requestSort("dailyROI")
+                                  : requestSort("dailyPNL")
+                              }
+                              className={
+                                sortType == "ROI"
+                                  ? getClassNamesFor("dailyROI")
+                                  : getClassNamesFor("dailyPNL")
+                              }
+                            >
                               Daily
                             </h5>
                             <div>
@@ -601,8 +630,19 @@ const ProductTable = ({
                             </div>
                           </div>
                           <div className="secondline_b">
-                            <h5 onClick={() => requestSort("weeklyROI")}>
-                              weeklyROI
+                            <h5
+                              onClick={() =>
+                                sortType == "ROI"
+                                  ? requestSort("weeklyROI")
+                                  : requestSort("weeklyPNL")
+                              }
+                              className={
+                                sortType == "ROI"
+                                  ? getClassNamesFor("weeklyROI")
+                                  : getClassNamesFor("weeklyPNL")
+                              }
+                            >
+                              weekly
                             </h5>
                             <div>
                               {items.weeklyROI && items.weeklyROI ? (
@@ -636,7 +676,18 @@ const ProductTable = ({
                             </div>
                           </div>
                           <div className="secondline_c">
-                            <h5 onClick={() => requestSort("monthlyROI")}>
+                            <h5
+                              onClick={() =>
+                                sortType == "ROI"
+                                  ? requestSort("monthlyROI")
+                                  : requestSort("monthlyPNL")
+                              }
+                              className={
+                                sortType == "ROI"
+                                  ? getClassNamesFor("monthlyROI")
+                                  : getClassNamesFor("monthlyPNL")
+                              }
+                            >
                               Monthly
                             </h5>
                             <div>
@@ -671,22 +722,43 @@ const ProductTable = ({
                             </div>
                           </div>
                           <div className="secondline_d">
-                            <h5 onClick={() => requestSort("allROI")}>
+                            <h5
+                              className={
+                                sortType == "ROI"
+                                  ? getClassNamesFor("allROI")
+                                  : getClassNamesFor("allPNL")
+                              }
+                              onClick={() =>
+                                sortType == "ROI"
+                                  ? requestSort("allROI")
+                                  : requestSort("allPNL")
+                              }
+                            >
                               All-time
                             </h5>
                             <div>
-                            {items.allROI && items.allROI ? (  <h6
-                                className={items.allROI > 0 ? "" : "color_red "}
-                              >
-                                {items.allROI > 0
-                                  ? `+${items.allROI.toLocaleString("en-US", {
-                                      valute: "USD",
-                                    })}%`
-                                  : `${items.allROI.toLocaleString("en-US", {
-                                      valute: "USD",
-                                    })}%`}
-                              </h6>):(  <h6> &nbsp;0%</h6>)}
-                              {items.allPNL && items.allPNL ? ( <p>{`≈ $${items.allPNL}`}</p>):( <p>$0</p>)}
+                              {items.allROI && items.allROI ? (
+                                <h6
+                                  className={
+                                    items.allROI > 0 ? "" : "color_red "
+                                  }
+                                >
+                                  {items.allROI > 0
+                                    ? `+${items.allROI.toLocaleString("en-US", {
+                                        valute: "USD",
+                                      })}%`
+                                    : `${items.allROI.toLocaleString("en-US", {
+                                        valute: "USD",
+                                      })}%`}
+                                </h6>
+                              ) : (
+                                <h6> &nbsp;0%</h6>
+                              )}
+                              {items.allPNL && items.allPNL ? (
+                                <p>{`≈ $${items.allPNL}`}</p>
+                              ) : (
+                                <p>$0</p>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -736,7 +808,7 @@ const ProductTable = ({
 
 export const ProductSort1 = () => {
   const [sortType, setsortType] = useState("ROI");
-  const [periodType, setperiodType] = useState("Daily");
+  const [periodType, setperiodType] = useState("daily");
   useEffect(() => {
     apis();
   }, [sortType, periodType]);
@@ -748,7 +820,6 @@ export const ProductSort1 = () => {
     );
     setLeaderboard(data.data.entries);
   };
-  console.log(leaderboard);
   const changeState = (e) => {
     const value = e.target.value;
     setsortType(value);
@@ -758,7 +829,6 @@ export const ProductSort1 = () => {
     value = value.substring(0, value.length - 3);
     setperiodType(value);
   };
-  console.log(leaderboard);
 
   return (
     <>
@@ -770,6 +840,7 @@ export const ProductSort1 = () => {
               changeState={changeState}
               products={[leaderboard]}
               periodType={periodType}
+              sortType={sortType}
             />
           )}
         </div>

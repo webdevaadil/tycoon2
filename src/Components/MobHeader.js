@@ -69,7 +69,7 @@ function MobHeader() {
         <h2 id="main-menu-heading" class="sr-only">Main menu</h2>
         <ul aria-labelledby="main-menu-heading">
           <li><a href="#homebanner">Leaderboard</a></li>
-          <li><a href="#Faq">Faq</a></li>
+          <li><a href="#Faq">Faq's</a></li>
         </ul>
        </nav>
        <a href="#main-menu-toggle" class="backdrop"  tabindex="-1"  aria-hidden="true" hidden> </a>

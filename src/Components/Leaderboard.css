@@ -428,6 +428,18 @@ button.bnnerbtn {
     }
  }
  @media (max-width: 793px) {
+   .ascending {
+      background-color: transparent;
+      color: #b3cee2 !important;
+      font-weight: 500 !important;
+   }
+   
+   .descending {
+      background-color: transparent;
+      color: #b3cee2 !important;
+      font-weight: 500 !important;
+   
+   }
    .table_heading img{
       padding-top: 22px;
       padding-left: 15px;
