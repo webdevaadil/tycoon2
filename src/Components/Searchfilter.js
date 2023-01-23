@@ -309,6 +309,9 @@ const ProductTable = ({
 
                       //   setA(index)
                       // console.log(items.dailyROI);
+                      if (items.openPositions == 0) {
+                        items.openPositions = "0";
+                      }
                       return (
                         <tr key={index} className="sub-body">
                           <td className="body_sno">
@@ -529,8 +532,8 @@ const ProductTable = ({
               })
               .map((items, index) => {
                 console.log(items.openPositions);
-                if(items.openPositions==0){
-                  items.openPositions = "0"
+                if (items.openPositions == 0) {
+                  items.openPositions = "0";
                 }
                 return (
                   <>
@@ -570,7 +573,10 @@ const ProductTable = ({
                             <h6 onClick={() => requestSort("openPositions")}>
                               Open Position
                             </h6>
-                            <p> {items.openPositions ? items.openPositions : ""}</p>
+                            <p>
+                              {" "}
+                              {items.openPositions ? items.openPositions : ""}
+                            </p>
                           </div>
                           {/* <div className="media_btn" onclick="addClass()"><input type="button"  id={index} value="+" onClick={(e) => {
                                                     if (e.target.value == "-") {
