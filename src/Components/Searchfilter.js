@@ -281,8 +281,8 @@ const ProductTable = ({
                     <th className="head_openposition">
                       <button
                         type="button"
-                        onClick={() => requestSort("position")}
-                        className={getClassNamesFor("position")}
+                        onClick={() => requestSort("openPositions")}
+                        className={getClassNamesFor("openPositions")}
                       >
                         Position
                       </button>
@@ -461,7 +461,7 @@ const ProductTable = ({
                           </td>
 
                           <td className="body_openposition">
-                            {items.position ? items.position : ""}
+                            {items.openPositions ? items.openPositions : ""}
                           </td>
                           <td className="body_follow">
                             <input
@@ -528,6 +528,10 @@ const ProductTable = ({
                 );
               })
               .map((items, index) => {
+                console.log(items.openPositions);
+                if(items.openPositions==0){
+                  items.openPositions = "0"
+                }
                 return (
                   <>
                     <div className="flex_body">
@@ -563,10 +567,10 @@ const ProductTable = ({
                             )}
                           </div>
                           <div className="firstline_b">
-                            <h6 onClick={() => requestSort("position")}>
+                            <h6 onClick={() => requestSort("openPositions")}>
                               Open Position
                             </h6>
-                            <p> {items.position ? items.position : ""}</p>
+                            <p> {items.openPositions ? items.openPositions : ""}</p>
                           </div>
                           {/* <div className="media_btn" onclick="addClass()"><input type="button"  id={index} value="+" onClick={(e) => {
                                                     if (e.target.value == "-") {
