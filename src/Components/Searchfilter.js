@@ -284,7 +284,7 @@ const ProductTable = ({
                         onClick={() => requestSort("openPositions")}
                         className={getClassNamesFor("openPositions")}
                       >
-                        Position
+                        Open Positions
                       </button>
                     </th>
                     <th>Action</th>
