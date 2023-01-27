@@ -11,15 +11,16 @@ import axios from "axios";
 const useSortableData = (items, config = null) => {
   const [sortConfig, setSortConfig] = React.useState(config);
   const [nameclass, setNameclass] = useState("");
+
   const sortedItems = React.useMemo(() => {
     let sortableItems = [...items];
     if (sortConfig !== null) {
       sortableItems.sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
-          return sortConfig.direction === "ascending" ? -1 : 1;
+          return sortConfig.direction === "descending" ? -1 : 1;
         }
         if (a[sortConfig.key] > b[sortConfig.key]) {
-          return sortConfig.direction === "ascending" ? 1 : -1;
+          return sortConfig.direction === "descending" ? 1 : -1;
         }
         return 0;
       });
@@ -28,14 +29,14 @@ const useSortableData = (items, config = null) => {
   }, [items, sortConfig]);
 
   const requestSort = (key) => {
-    let direction = "descending";
+    let direction = "ascending";
     if (
       sortConfig &&
       sortConfig.key === key &&
-      sortConfig.direction === "descending"
+      sortConfig.direction === "ascending"
     ) {
-      direction = "ascending";
-    }
+      direction = "descending";
+    } 
     setSortConfig({ key, direction });
   };
 
@@ -49,19 +50,20 @@ const ProductTable = ({
   periodType,
   sortType,
 }) => {
+ 
   useEffect(() => {
-    requestSort(`${periodType}${sortType}`);
     getClassNamesFor(`${periodType}${sortType}`);
+    requestSort(`${periodType}${sortType}`);
     console.log(`${periodType}${sortType}`);
-  }, [periodType, changeState]);
-  useEffect(() => {
-    requestSort("dailyROI");
-    getClassNamesFor("dailyROI");
     if (sortType === "dailyPNL") {
       requestSort("dailyPNL");
       getClassNamesFor("dailyPNL");
     }
-  }, []);
+    if (sortType === "dailyROI") {
+      requestSort("dailyROI");
+      getClassNamesFor("dailyROI");
+    }
+  }, [periodType ,sortType]);
 
   const [loadmores, setLoadmore] = useState(1);
 
@@ -342,11 +344,11 @@ const ProductTable = ({
                               >
                                 {items.dailyROI > 0
                                   ? `+${new Intl.NumberFormat("en-IN", {
-                                    maximumFractionDigits: 2,
-                                  }).format(items.dailyROI)}%`
+                                      maximumFractionDigits: 2,
+                                    }).format(items.dailyROI)}%`
                                   : `${new Intl.NumberFormat("en-IN", {
-                                    maximumFractionDigits: 2,
-                                  }).format(items.dailyROI)}%`}
+                                      maximumFractionDigits: 2,
+                                    }).format(items.dailyROI)}%`}
                               </h6>
                             ) : (
                               <h6>&nbsp; 0%</h6>
@@ -359,9 +361,13 @@ const ProductTable = ({
                             */}
 
                             {items.dailyPNL && items.dailyPNL ? (
-                              <p> ≈ ${new Intl.NumberFormat("en-IN", {
-                                maximumFractionDigits: 2,
-                              }).format(items.dailyPNL)}</p>
+                              <p>
+                                {" "}
+                                ≈ $
+                                {new Intl.NumberFormat("en-IN", {
+                                  maximumFractionDigits: 2,
+                                }).format(items.dailyPNL)}
+                              </p>
                             ) : (
                               <p>≈$0</p>
                             )}
@@ -376,11 +382,11 @@ const ProductTable = ({
                               >
                                 {items.weeklyROI > 0
                                   ? `+${new Intl.NumberFormat("en-IN", {
-                                    maximumFractionDigits: 2,
-                                  }).format(items.weeklyROI)}%`
+                                      maximumFractionDigits: 2,
+                                    }).format(items.weeklyROI)}%`
                                   : `${new Intl.NumberFormat("en-IN", {
-                                    maximumFractionDigits: 2,
-                                  }).format(items.weeklyROI)}%`}
+                                      maximumFractionDigits: 2,
+                                    }).format(items.weeklyROI)}%`}
                               </h6>
                             ) : (
                               <h6>&nbsp;0%</h6>
@@ -403,11 +409,11 @@ const ProductTable = ({
                               >
                                 {items.monthlyROI > 0
                                   ? `+${new Intl.NumberFormat("en-IN", {
-                                    maximumFractionDigits: 2,
-                                  }).format(items.monthlyROI)}%`
+                                      maximumFractionDigits: 2,
+                                    }).format(items.monthlyROI)}%`
                                   : `${new Intl.NumberFormat("en-IN", {
-                                    maximumFractionDigits: 2,
-                                  }).format(items.monthlyROI)}%`}
+                                      maximumFractionDigits: 2,
+                                    }).format(items.monthlyROI)}%`}
                               </h6>
                             ) : (
                               <h6> &nbsp;0%</h6>
@@ -428,11 +434,11 @@ const ProductTable = ({
                               >
                                 {items.allROI > 0
                                   ? `+${new Intl.NumberFormat("en-IN", {
-                                    maximumFractionDigits: 2,
-                                  }).format(items.allROI)}%`
+                                      maximumFractionDigits: 2,
+                                    }).format(items.allROI)}%`
                                   : `${new Intl.NumberFormat("en-IN", {
-                                    maximumFractionDigits: 2,
-                                  }).format(items.allROI)}%`}
+                                      maximumFractionDigits: 2,
+                                    }).format(items.allROI)}%`}
                               </h6>
                             ) : (
                               <h6> &nbsp;0%</h6>
@@ -522,7 +528,6 @@ const ProductTable = ({
                 );
               })
               .map((items, index) => {
-                console.log(items.openPositions);
                 if (items.openPositions == 0) {
                   items.openPositions = "0";
                 }
@@ -608,11 +613,11 @@ const ProductTable = ({
                                 >
                                   {items.dailyROI > 0
                                     ? `+${new Intl.NumberFormat("en-IN", {
-                                      maximumFractionDigits: 2,
-                                    }).format(items.dailyROI)}%`
+                                        maximumFractionDigits: 2,
+                                      }).format(items.dailyROI)}%`
                                     : `${new Intl.NumberFormat("en-IN", {
-                                      maximumFractionDigits: 2,
-                                    }).format(items.dailyROI)}%`}
+                                        maximumFractionDigits: 2,
+                                      }).format(items.dailyROI)}%`}
                                 </h6>
                               ) : (
                                 <h6>&nbsp; 0%</h6>
@@ -650,11 +655,11 @@ const ProductTable = ({
                                 >
                                   {items.weeklyROI > 0
                                     ? `+${new Intl.NumberFormat("en-IN", {
-                                      maximumFractionDigits: 2,
-                                    }).format(items.weeklyROI)}%`
+                                        maximumFractionDigits: 2,
+                                      }).format(items.weeklyROI)}%`
                                     : `${new Intl.NumberFormat("en-IN", {
-                                      maximumFractionDigits: 2,
-                                    }).format(items.weeklyROI)}%`}
+                                        maximumFractionDigits: 2,
+                                      }).format(items.weeklyROI)}%`}
                                 </h6>
                               ) : (
                                 <h6>&nbsp;0%</h6>
@@ -692,11 +697,11 @@ const ProductTable = ({
                                 >
                                   {items.monthlyROI > 0
                                     ? `+${new Intl.NumberFormat("en-IN", {
-                                      maximumFractionDigits: 2,
-                                    }).format(items.monthlyROI)}%`
+                                        maximumFractionDigits: 2,
+                                      }).format(items.monthlyROI)}%`
                                     : `${new Intl.NumberFormat("en-IN", {
-                                      maximumFractionDigits: 2,
-                                    }).format(items.monthlyROI)}%`}
+                                        maximumFractionDigits: 2,
+                                      }).format(items.monthlyROI)}%`}
                                 </h6>
                               ) : (
                                 <h6> &nbsp;0%</h6>
@@ -734,8 +739,8 @@ const ProductTable = ({
                                 >
                                   {items.allROI > 0
                                     ? `+${new Intl.NumberFormat("en-IN", {
-                                      maximumFractionDigits: 2,
-                                    }).format(items.allROI)}%`
+                                        maximumFractionDigits: 2,
+                                      }).format(items.allROI)}%`
                                     : `${items.allROI.toLocaleString("en-US", {
                                         valute: "USD",
                                       })}%`}
