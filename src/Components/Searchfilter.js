@@ -343,10 +343,10 @@ const ProductTable = ({
                                 }
                               >
                                 {items.dailyROI > 0
-                                  ? `+${new Intl.NumberFormat("en-IN", {
+                                  ? `+${new Intl.NumberFormat("en-US", {
                                       maximumFractionDigits: 2,
                                     }).format(items.dailyROI)}%`
-                                  : `${new Intl.NumberFormat("en-IN", {
+                                  : `${new Intl.NumberFormat("en-US", {
                                       maximumFractionDigits: 2,
                                     }).format(items.dailyROI)}%`}
                               </h6>
@@ -355,7 +355,7 @@ const ProductTable = ({
                             )}
                             {/* 
                             
-                            new Intl.NumberFormat('en-IN', {
+                            new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 2
 }).format(number)
                             */}
@@ -364,7 +364,7 @@ const ProductTable = ({
                               <p>
                                 {" "}
                                 ≈ $
-                                {new Intl.NumberFormat("en-IN", {
+                                {new Intl.NumberFormat("en-US", {
                                   maximumFractionDigits: 2,
                                 }).format(items.dailyPNL)}
                               </p>
@@ -381,10 +381,10 @@ const ProductTable = ({
                                 }
                               >
                                 {items.weeklyROI > 0
-                                  ? `+${new Intl.NumberFormat("en-IN", {
+                                  ? `+${new Intl.NumberFormat("en-US", {
                                       maximumFractionDigits: 2,
                                     }).format(items.weeklyROI)}%`
-                                  : `${new Intl.NumberFormat("en-IN", {
+                                  : `${new Intl.NumberFormat("en-US", {
                                       maximumFractionDigits: 2,
                                     }).format(items.weeklyROI)}%`}
                               </h6>
@@ -392,7 +392,7 @@ const ProductTable = ({
                               <h6>&nbsp;0%</h6>
                             )}
                             {items.weeklyPNL && items.weeklyPNL ? (
-                              <p>{`≈ $${new Intl.NumberFormat("en-IN", {
+                              <p>{`≈ $${new Intl.NumberFormat("en-US", {
                                 maximumFractionDigits: 2,
                               }).format(items.weeklyPNL)}`}</p>
                             ) : (
@@ -408,10 +408,10 @@ const ProductTable = ({
                                 }
                               >
                                 {items.monthlyROI > 0
-                                  ? `+${new Intl.NumberFormat("en-IN", {
+                                  ? `+${new Intl.NumberFormat("en-US", {
                                       maximumFractionDigits: 2,
                                     }).format(items.monthlyROI)}%`
-                                  : `${new Intl.NumberFormat("en-IN", {
+                                  : `${new Intl.NumberFormat("en-US", {
                                       maximumFractionDigits: 2,
                                     }).format(items.monthlyROI)}%`}
                               </h6>
@@ -419,7 +419,7 @@ const ProductTable = ({
                               <h6> &nbsp;0%</h6>
                             )}
                             {items.monthlyPNL && items.monthlyPNL ? (
-                              <p>{`≈ $${new Intl.NumberFormat("en-IN", {
+                              <p>{`≈ $${new Intl.NumberFormat("en-US", {
                                 maximumFractionDigits: 2,
                               }).format(items.monthlyPNL)}`}</p>
                             ) : (
@@ -433,10 +433,10 @@ const ProductTable = ({
                                 className={items.allROI > 0 ? "" : "color_red"}
                               >
                                 {items.allROI > 0
-                                  ? `+${new Intl.NumberFormat("en-IN", {
+                                  ? `+${new Intl.NumberFormat("en-US", {
                                       maximumFractionDigits: 2,
                                     }).format(items.allROI)}%`
-                                  : `${new Intl.NumberFormat("en-IN", {
+                                  : `${new Intl.NumberFormat("en-US", {
                                       maximumFractionDigits: 2,
                                     }).format(items.allROI)}%`}
                               </h6>
@@ -444,7 +444,7 @@ const ProductTable = ({
                               <h6> &nbsp;0%</h6>
                             )}
                             {items.allPNL && items.allPNL ? (
-                              <p>{`≈ $${new Intl.NumberFormat("en-IN", {
+                              <p>{`≈ $${new Intl.NumberFormat("en-US", {
                                 maximumFractionDigits: 2,
                               }).format(items.allPNL)}`}</p>
                             ) : (
@@ -612,10 +612,10 @@ const ProductTable = ({
                                   }
                                 >
                                   {items.dailyROI > 0
-                                    ? `+${new Intl.NumberFormat("en-IN", {
+                                    ? `+${new Intl.NumberFormat("en-US", {
                                         maximumFractionDigits: 2,
                                       }).format(items.dailyROI)}%`
-                                    : `${new Intl.NumberFormat("en-IN", {
+                                    : `${new Intl.NumberFormat("en-US", {
                                         maximumFractionDigits: 2,
                                       }).format(items.dailyROI)}%`}
                                 </h6>
@@ -623,7 +623,7 @@ const ProductTable = ({
                                 <h6>&nbsp; 0%</h6>
                               )}
                               {items.dailyPNL && items.dailyPNL ? (
-                                <p>{`≈ $${new Intl.NumberFormat("en-IN", {
+                                <p>{`≈ $${new Intl.NumberFormat("en-US", {
                                   maximumFractionDigits: 2,
                                 }).format(items.dailyPNL)}`}</p>
                               ) : (
@@ -654,10 +654,10 @@ const ProductTable = ({
                                   }
                                 >
                                   {items.weeklyROI > 0
-                                    ? `+${new Intl.NumberFormat("en-IN", {
+                                    ? `+${new Intl.NumberFormat("en-US", {
                                         maximumFractionDigits: 2,
                                       }).format(items.weeklyROI)}%`
-                                    : `${new Intl.NumberFormat("en-IN", {
+                                    : `${new Intl.NumberFormat("en-US", {
                                         maximumFractionDigits: 2,
                                       }).format(items.weeklyROI)}%`}
                                 </h6>
@@ -665,7 +665,7 @@ const ProductTable = ({
                                 <h6>&nbsp;0%</h6>
                               )}
                               {items.weeklyPNL && items.weeklyPNL ? (
-                                <p>{`≈ $${new Intl.NumberFormat("en-IN", {
+                                <p>{`≈ $${new Intl.NumberFormat("en-US", {
                                   maximumFractionDigits: 2,
                                 }).format(items.weeklyPNL)}`}</p>
                               ) : (
@@ -696,10 +696,10 @@ const ProductTable = ({
                                   }
                                 >
                                   {items.monthlyROI > 0
-                                    ? `+${new Intl.NumberFormat("en-IN", {
+                                    ? `+${new Intl.NumberFormat("en-US", {
                                         maximumFractionDigits: 2,
                                       }).format(items.monthlyROI)}%`
-                                    : `${new Intl.NumberFormat("en-IN", {
+                                    : `${new Intl.NumberFormat("en-US", {
                                         maximumFractionDigits: 2,
                                       }).format(items.monthlyROI)}%`}
                                 </h6>
@@ -707,7 +707,7 @@ const ProductTable = ({
                                 <h6> &nbsp;0%</h6>
                               )}
                               {items.monthlyPNL && items.monthlyPNL ? (
-                                <p>{`≈ $${new Intl.NumberFormat("en-IN", {
+                                <p>{`≈ $${new Intl.NumberFormat("en-US", {
                                   maximumFractionDigits: 2,
                                 }).format(items.monthlyPNL)}`}</p>
                               ) : (
@@ -738,7 +738,7 @@ const ProductTable = ({
                                   }
                                 >
                                   {items.allROI > 0
-                                    ? `+${new Intl.NumberFormat("en-IN", {
+                                    ? `+${new Intl.NumberFormat("en-US", {
                                         maximumFractionDigits: 2,
                                       }).format(items.allROI)}%`
                                     : `${items.allROI.toLocaleString("en-US", {
@@ -749,7 +749,7 @@ const ProductTable = ({
                                 <h6> &nbsp;0%</h6>
                               )}
                               {items.allPNL && items.allPNL ? (
-                                <p>{`≈ $${new Intl.NumberFormat("en-IN", {
+                                <p>{`≈ $${new Intl.NumberFormat("en-US", {
                                   maximumFractionDigits: 2,
                                 }).format(items.allPNL)}`}</p>
                               ) : (
