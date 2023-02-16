@@ -353,12 +353,6 @@ const ProductTable = ({
                             ) : (
                               <h6>&nbsp; 0%</h6>
                             )}
-                            {/* 
-                            
-                            new Intl.NumberFormat('en-US', {
-  maximumFractionDigits: 2
-}).format(number)
-                            */}
 
                             {items.dailyPNL && items.dailyPNL ? (
                               <p>
@@ -391,12 +385,14 @@ const ProductTable = ({
                             ) : (
                               <h6>&nbsp;0%</h6>
                             )}
-                            {items.weeklyPNL && items.weeklyPNL ? (
+                            {items.weeklyPNL && items.weeklyPNL < 0 ? (
+                              <p>{`≈ ${new Intl.NumberFormat("en-US", {
+                                maximumFractionDigits: 2,
+                              }).format(items.weeklyPNL).replace(/\-/g, "-$")}`}</p>
+                            ) : (
                               <p>{`≈ $${new Intl.NumberFormat("en-US", {
                                 maximumFractionDigits: 2,
                               }).format(items.weeklyPNL)}`}</p>
-                            ) : (
-                              <p>≈$0</p>
                             )}
                           </td>
 
@@ -418,12 +414,14 @@ const ProductTable = ({
                             ) : (
                               <h6> &nbsp;0%</h6>
                             )}
-                            {items.monthlyPNL && items.monthlyPNL ? (
+                            {items.monthlyPNL && items.monthlyPNL < 0 ? (
+                              <p>{`≈ ${new Intl.NumberFormat("en-US", {
+                                maximumFractionDigits: 2,
+                              }).format(items.monthlyPNL).replace(/\-/g, "-$")}`}</p>
+                            ) : (
                               <p>{`≈ $${new Intl.NumberFormat("en-US", {
                                 maximumFractionDigits: 2,
                               }).format(items.monthlyPNL)}`}</p>
-                            ) : (
-                              <p>$0</p>
                             )}
                           </td>
 
@@ -443,12 +441,14 @@ const ProductTable = ({
                             ) : (
                               <h6> &nbsp;0%</h6>
                             )}
-                            {items.allPNL && items.allPNL ? (
+                            {items.allPNL && items.allPNL < 0 ? (
+                              <p>{`≈ ${new Intl.NumberFormat("en-US", {
+                                maximumFractionDigits: 2,
+                              }).format(items.allPNL).replace(/\-/g, "-$")}`}</p>
+                            ) : (
                               <p>{`≈ $${new Intl.NumberFormat("en-US", {
                                 maximumFractionDigits: 2,
                               }).format(items.allPNL)}`}</p>
-                            ) : (
-                              <p>$0</p>
                             )}
                           </td>
 
@@ -547,7 +547,7 @@ const ProductTable = ({
                                 className="trader_img"
                               />
                             ) : (
-                              <p className="trader_img"></p>
+                              <img src={dummy} alt="" className="trader_img" />
                             )}
                             <span>{items.nickName}</span>
                           </div>
@@ -664,13 +664,15 @@ const ProductTable = ({
                               ) : (
                                 <h6>&nbsp;0%</h6>
                               )}
-                              {items.weeklyPNL && items.weeklyPNL ? (
-                                <p>{`≈ $${new Intl.NumberFormat("en-US", {
-                                  maximumFractionDigits: 2,
-                                }).format(items.weeklyPNL)}`}</p>
-                              ) : (
-                                <p>≈$0</p>
-                              )}
+                              {items.weeklyPNL && items.weeklyPNL < 0 ? (
+                              <p>{`≈ ${new Intl.NumberFormat("en-US", {
+                                maximumFractionDigits: 2,
+                              }).format(items.weeklyPNL).replace(/\-/g, "-$")}`}</p>
+                            ) : (
+                              <p>{`≈ $${new Intl.NumberFormat("en-US", {
+                                maximumFractionDigits: 2,
+                              }).format(items.weeklyPNL)}`}</p>
+                            )}
                             </div>
                           </div>
                           <div className="secondline_c">
@@ -706,13 +708,15 @@ const ProductTable = ({
                               ) : (
                                 <h6> &nbsp;0%</h6>
                               )}
-                              {items.monthlyPNL && items.monthlyPNL ? (
-                                <p>{`≈ $${new Intl.NumberFormat("en-US", {
-                                  maximumFractionDigits: 2,
-                                }).format(items.monthlyPNL)}`}</p>
-                              ) : (
-                                <p>$0</p>
-                              )}
+                             {items.monthlyPNL && items.monthlyPNL < 0 ? (
+                              <p>{`≈ ${new Intl.NumberFormat("en-US", {
+                                maximumFractionDigits: 2,
+                              }).format(items.monthlyPNL).replace(/\-/g, "-$")}`}</p>
+                            ) : (
+                              <p>{`≈ $${new Intl.NumberFormat("en-US", {
+                                maximumFractionDigits: 2,
+                              }).format(items.monthlyPNL)}`}</p>
+                            )}
                             </div>
                           </div>
                           <div className="secondline_d">
@@ -748,13 +752,15 @@ const ProductTable = ({
                               ) : (
                                 <h6> &nbsp;0%</h6>
                               )}
-                              {items.allPNL && items.allPNL ? (
-                                <p>{`≈ $${new Intl.NumberFormat("en-US", {
-                                  maximumFractionDigits: 2,
-                                }).format(items.allPNL)}`}</p>
-                              ) : (
-                                <p>$0</p>
-                              )}
+                              {items.allPNL && items.allPNL < 0 ? (
+                              <p>{`≈ ${new Intl.NumberFormat("en-US", {
+                                maximumFractionDigits: 2,
+                              }).format(items.allPNL).replace(/\-/g, "-$")}`}</p>
+                            ) : (
+                              <p>{`≈ $${new Intl.NumberFormat("en-US", {
+                                maximumFractionDigits: 2,
+                              }).format(items.allPNL)}`}</p>
+                            )}
                             </div>
                           </div>
                         </div>

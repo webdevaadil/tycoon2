@@ -681,7 +681,7 @@ img.head-img1 {
    border-top: none;
 }
 .faq-sectionss h3 {
-   font-size: 18px;
+   font-size: 20px;
    line-height: 22px;
     margin-bottom: 20px;
 }
@@ -689,7 +689,7 @@ img.head-img1 {
    top: 12px;
 }
 .faqs .faq.open .faq-answer {
-   font-size: 14px;
+   font-size: 16px;
    line-height: 19px;
    color: #B3CEE2;
 }
@@ -726,23 +726,23 @@ img.head-img1 {
    } */
    .line_a {
     
-      font-size: 10px;
+      font-size: 12px;
    }
    .line_a span {
-      font-size: 14px;
+      font-size: 16px;
       margin-top: 10px;
 
 
    }
    .secondline h5 {
-      font-size: 10px;
+      font-size: 12px;
    }
    .secondline h6 {
-      font-size: 12px;
+      font-size: 14px;
    
    }
    .secondline p {
-      font-size: 10px;
+      font-size: 12px;
     
    }
   
@@ -784,20 +784,20 @@ img.head-img1 {
       font-size: 8px;
    }
    .line_a span {
-      font-size: 12px;
+      font-size: 14px;
       color: #F0F9FF;
       font-weight: 600;
       line-height: 17px;
   }
    .secondline h5 {
-      font-size: 8px;
+      font-size: 11px;
    }
    .secondline h6 {
-      font-size: 8px;
+      font-size: 10px;
    
    }
    .secondline p {
-      font-size: 10px;
+      font-size: 12px;
     line-height: 12px;
    }
 
