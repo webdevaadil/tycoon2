@@ -1,12 +1,7 @@
 import "./App.css";
-import Faqcontent from "./Components/Faqcontent";
-import { Footer } from "./Components/Footer";
-import { Header } from "./Components/Header";
-import { Homecotnent } from "./Components/Homecotnent";
-import { ProductSort } from "./Components/ProductSort";
-import { ProductSort1 } from "./Components/Searchfilter";
-import MobHeader from "./Components/MobHeader";
 import { Fragment, useEffect, useState } from "react";
+import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import { Home } from "./Components/Home";
 
 function App() {
   const [sorttypes, setSorttype] = useState();
@@ -16,15 +11,11 @@ function App() {
   console.log(sorttypes);
   return (
     <Fragment>
-      <div className="App">
-        <Header />
-        <MobHeader />
-        <Homecotnent />
-        {/* <ProductSort/> */}
-        <ProductSort1 />
-        <Faqcontent />
-        <Footer />
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
     </Fragment>
   );
 }

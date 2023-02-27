@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import "./Leaderboard.css";
+import "./Leaderboard.css";
 import { Pagination } from "./Pagination";
 import leadericon from "./Images/BinanceFutures.svg";
 import leadericon1 from "./Images/table-logo.png";
