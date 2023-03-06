@@ -567,6 +567,8 @@ p.mbl-copyrights {
   line-height: 20px;
   font-family: 'Inter', sans-serif;
   width: 100px;
+  cursor: pointer;
+  transition: 0.6s;
 }
 .product-sortss table.table.table-hover.media_table td.body_sno,
 table.table.table-hover.media_table td.body_trader {
@@ -862,12 +864,337 @@ select::-ms-expand {
   color: red;
 }
 
+/************************************* Profile page CSS *************************************/
 
+.profile-design h3 {
+  text-align: left;
+}
+.profile-box.box-bdr-bg {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+  width: 100%;
+}
+.profile-box h4 {
+  color: #fff;
+  font-size: 18px;
+  margin-top: 0;
+  font-family: 'Open Sans';
+  margin-bottom: 0;
+  margin-left: 23px;
+}
+.profiles-badge img {
+  width: 69px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 20px 3px #000;
+  height: 69px;
+  object-fit: cover;
+}
+
+img.verify-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.profile-imgs {
+  position: relative;
+}
+.main-profiles {
+  background: #0E1A29;
+  border: 1px solid #0464BD;
+  padding: 22px;
+  border-radius: 10px;
+  width: 25%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.main-profiles a.btn.btn-primary.fav {
+  display: block;
+  width: 100%;
+}
+.main-profiles input.btn.btn-primary {
+  width: 100%;
+  margin-bottom: 12px;
+}
+.main-profiles a.btn.btn-primary.fav {
+  display: block;
+  width: auto;
+  text-decoration: none;
+  border: 1px solid #C7960A;
+  color: #C7960A;
+  border-radius: 5px;
+  padding: 7px 15px;
+  transition: 0.6s;
+}
+input.btn.btn-primary.favs {
+  background: no-repeat;
+  color: #CA9605;
+  transition: 0.6s;
+}
+
+input.btn.btn-primary.favs:hover {
+  background: #CA9605;
+  color: #041624 !important;
+  transition: 0.6s;
+}
+.icon-boxs {
+  background: #0E1A29;
+  border: 1px solid #0464BD;
+  padding: 22px;
+  border-radius: 10px;
+  color: #F0F9FF;
+  text-align: left;
+  width: 100%;
+  margin-left: 21px;
+  margin-bottom: 21px;
+  position: relative;
+}
+.icon-boxs h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 0;
+  font-family: 'Open Sans';
+  margin-top: 11px;
+}
+.icon-box-main {
+  display: flex;
+  justify-content: space-between;
+}
+.common-profiles {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon-boxs h4 {
+  margin-top: 9px;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+.profit-c {
+  color: #00BA80;
+}
+.number-box {
+  width: 75%;
+}
+.container-f {
+  width: 1330px;
+  margin: 0 auto;
+}
+.yellow {
+  color: #F3BA2F;
+}
+
+.trader-rank {
+  display: flex;
+  justify-content: space-between;
+  background: #0E1A29;
+  border: 1px solid #0464BD;
+  padding: 22px;
+  border-radius: 10px;
+  color: #ffffff;
+  text-align: left;
+  margin-left: 21px;
+  align-items: center;
+}
+.schedule-ranks h4 {
+  color: #F0F9FF;
+  font-size: 18px;
+  margin: 0;
+  font-family: 'Open Sans';
+  font-weight: 700;
+}
+.ranks h3 {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+.schedule-ranks p {
+  margin-top: 0;
+  font-size: 14px;
+}
+.schedule-ranks {
+  width: 21.25%;
+}
+.ranks {
+  width: 25%;
+}
+.main-profiles .body_follow {
+  width: 100%;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 134px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  color: #BBD8FA;
+  font-size: 13px;
+  line-height: 20px;
+  background: #04131E;
+  border-radius: 10px 10px 0 10px;
+  text-align: left;
+  padding: 14px;
+  top: -73px;
+  right: 23px;
+}
+.tooltipico {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+.statistics-main {
+  background: #0E1A29;
+  color: #FFFFFF;
+  padding: 22px;
+  border-radius: 10px;
+  padding-left: 43px;
+}
+.statistics-colm-main {
+  display: flex;
+  flex-wrap: wrap;
+}
+.statistics-con-box h4 {
+  font-size: 20px;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+.statistics-con-box p {
+  font-size: 16px;
+  margin-bottom: 0;
+  margin-top: 5px;
+}
+
+.statistics-con-box {
+  width: 15.6%;
+  text-align: left;
+  margin-right: 21px;
+  margin-bottom: 21px;
+  border-radius: 10px;
+  padding: 16px;
+  background: #0E1A29;
+  border: 1px solid #0464BD;
+}
+h4.red {
+  color: #EB5853;
+}
+.statistics-main {
+  margin-top: 50px;
+  border-radius: 10px;
+}
+h4.blue {
+  color: #21A4F1;
+}
+
+.statistics-main h3 {
+  margin-bottom: 31px;
+  font-size: 24px;
+}
+.graph-main {
+  background: #0E1A29;
+  color: #FFFFFF;
+  padding: 20px 43px 20px 43px;
+  border-radius: 10px;
+  margin-top: 50px;
+}
+.proformance-colms {
+  display: flex;
+  justify-content: space-between;
+}
+.proformance-colms h3 {
+  font-size: 24px;
+  color: #F0F9FF;
+}
+
+
+.table-user table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-user td, .table-user th {
+
+  text-align: left;
+  padding: 18px;
+  color: #B3CEE2;
+}
+
+.table-user tr{
+  background-color: #041624;
+}
+table.table-user {
+  width: 100%;
+  border-spacing: 0;
+}
+table.table-user th {
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 400;
+}
+.table-user tr td:nth-child(n+1), th:nth-child(n+1) {
+  border-bottom: 5px solid #0E1A29;
+  border-top: 5px solid #0E1A29;
+  border-left: 0;
+  border-right: 0;
+}
+.table-user tr:first-child th {
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid;
+  border-left: 0;
+  border-radius: 0;
+  border-radius: 0;
+  padding: 10px 20px;
+}
+.table-user tr:hover td:first-child, th:first-child {
+  border-left: 0;
+  border-right: 0 !important;
+}
+
+.table-main {
+  overflow-x: auto;
+}
+.proformance-colms .table_top_a {
+  display: flex;
+  gap: 10px;
+  justify-content: end;
+  width: 100%;
+}
 
 
 
 
 /*************responsive css************/
+
+@media(max-width:1350px) {
+  .container-f {
+    width: 95%;
+}
+.statistics-con-box {
+  margin-right: 18px;
+}
+
+
+
+
+
+
+
+}
+
 
 @media(max-width:1205px) {
   .container {
@@ -880,6 +1207,16 @@ select::-ms-expand {
     margin-top: 50px;
     letter-spacing: -1.94px;
 }
+.statistics-con-box {
+  width: 14.6%;
+}
+
+
+
+
+
+
+
 }
 @media(max-width:992px) {
   .product-sortss table.table 
@@ -915,6 +1252,67 @@ select::-ms-expand {
   width: 32px;
   height: 32px;
 }
+.common-profiles {
+  flex-wrap: wrap;
+}
+.icon-box-main {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.main-profiles {
+  width: 100%;
+}
+.profile-box.box-bdr-bg {
+  width: 40% !important;
+}
+.body_follow {
+  width: 54% !important;
+  display: flex;
+}
+.body_follow {
+  display: flex;
+}
+.body_follow div {
+  width: 100%;
+  margin-right: 14px;
+}
+.body_follow:hover input.btn.btn-primary {
+  margin-bottom: 0;
+}
+.number-box {
+  width: 100% !important;
+  margin-top: 21px;
+}
+.icon-boxs {
+  margin-left: 0;
+  margin-bottom: 21px;
+  position: relative;
+  width: 42.4%;
+}
+.main-profiles input.btn.btn-primary {
+    margin-bottom: 0;
+}
+.trader-rank {
+  margin-left: 0;
+}
+.statistics-con-box {
+  width: 26.5%;
+  margin: 0;
+  margin-bottom: 20px;
+}
+.statistics-main {
+  padding: 22px !important;
+}
+.statistics-colm-main {
+  justify-content: space-between;
+}
+.graph-main {
+  padding: 22px;
+}
+
+
+
 }
 
 @media(max-width:767px) {
@@ -993,6 +1391,29 @@ body {
   /* .right-footer ul li:nth-child(1){
     width: 100%;
   } */
+  .icon-boxs {
+    width: 41%;
+}
+.ranks {
+  width: 30%;
+}
+.statistics-con-box {
+  width: 25.2%;
+}
+.profile-box.box-bdr-bg {
+  width: 45% !important;
+}
+.statistics-main {
+  padding: 14px !important;
+}
+.graph-main {
+  padding: 14px;
+}
+
+
+
+
+
 }
 
 @media (max-width: 636px) {
@@ -1038,6 +1459,48 @@ body {
 .faqs .faq.open .faq-answer {
   padding-right: 0%;
 }
+.icon-boxs {
+  width: 39%;
+}
+.trader-rank {
+  flex-wrap: wrap;
+}
+.ranks .icon-rank {
+  display: flex;
+}
+.ranks {
+  width: 100%;
+}
+.schedule-ranks {
+  width: 21.25%;
+  margin-top: 26px;
+}
+.profile-design .home-content-buttn ul {
+  margin-bottom: 16px;
+}
+.statistics-con-box {
+  width: 24.2%;
+}
+.profile-box h4 {
+  margin-left: 14px;
+}
+.icon-rank img {
+  margin-right: 14px;
+}
+.proformance-colms {
+  flex-wrap: wrap;
+}
+.profile-design {
+  margin-top: 78px;
+}
+.table-user tr td:nth-child(n+1), th:nth-child(n+1) {
+  border-bottom: 5px solid #0E1A29;
+  border-top: 5px solid #0E1A29;
+  padding: 11px;
+  font-size: 15px;
+}
+
+
 }
 
 @media(max-width:505px) {
@@ -1211,6 +1674,34 @@ body {
   align-items: center !important;
   justify-content: center;
 }
+.profile-box.box-bdr-bg {
+  width: 100% !important;
+}
+.body_follow {
+  margin-top: 19px;
+}
+.icon-boxs {
+  width: 34%;
+  margin-bottom: 18px;
+}
+.icon-boxs h3 {
+  font-size: 16px;
+  font-weight: 700;
+}
+.statistics-con-box {
+  width: 36.2%;
+}
+.statistics-con-box p {
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.main-profiles {
+  padding-right: 0;
+}
+
+
+
 }
 @media (max-width: 350px) {
  
