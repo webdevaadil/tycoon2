@@ -207,6 +207,8 @@ img.noti {
   border: 1px solid #0464BD;
   border-radius: 5px;
   letter-spacing: -0.01em;
+  justify-content: space-evenly;
+  width: 90%;
 }
 
 .product-sortss table .media_table tr {
@@ -1062,6 +1064,8 @@ input.btn.btn-primary.favs:hover {
   padding: 22px;
   border-radius: 10px;
   padding-left: 43px;
+  padding-bottom: 50px;
+  margin-top: 50px;
 }
 .statistics-colm-main {
   display: flex;
@@ -1091,12 +1095,30 @@ input.btn.btn-primary.favs:hover {
 h4.red {
   color: #EB5853;
 }
-.statistics-main {
+.mainopen{
   margin-top: 50px;
   border-radius: 10px;
+  border: 1px solid #0464BD;
 }
 h4.blue {
   color: #21A4F1;
+}
+.openposition span {
+  color: #E25353;
+  padding-right: 5px;
+}
+.openposition span:last-child {
+  color: #F3BA2F;
+  padding-left: 5px;
+}
+.opsymbol {
+  color: white !important;
+}
+td.openrol {
+  color: #EB5853 !important;
+}
+td.openpnl {
+  color: #EB5853 !important;
 }
 
 .statistics-main h3 {
@@ -1152,12 +1174,57 @@ table.table-user th {
   border-right: 0;
 }
 .table-user tr:first-child th {
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid;
+  border-top: 1px solid #6B7385 
+  ;
+  border-bottom: 1px solid #6B7385 ;
   border-left: 0;
   border-radius: 0;
   border-radius: 0;
-  padding: 10px 20px;
+  padding: 15px 20px;
+}
+.phsymbol p {
+  margin: 0;
+  margin-bottom: 4px;
+}
+.phshort{
+  color:  #E25353;
+  padding-right: 5px;
+}
+.phnroi{
+  color: #E25353 !important;
+}
+.phproi{
+  color: #00BA80 !important;
+  padding-right: 5px;
+
+}
+.phyellow{
+  color: #F3BA2F !important;
+  padding-left: 5px;
+  padding-right: 5px;
+
+}
+.phsymbol{
+  color: white !important;
+  font-family: Open Sans;
+font-size: 12px;
+font-weight: 700;
+line-height: 16px;
+letter-spacing: 0px;
+text-align: left;
+
+font-family: Open Sans;
+font-size: 16px;
+font-weight: 700;
+line-height: 22px;
+letter-spacing: 0px;
+text-align: left;
+
+}
+.phlvymbol{
+  color: #21A4F1 !important;
+  padding-right: 5px;
+
 }
 .table-user tr:hover td:first-child, th:first-child {
   border-left: 0;

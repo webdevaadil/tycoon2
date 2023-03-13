@@ -8,14 +8,15 @@ import "../App.css";
 import { User } from "./User";
 
 export const Profile = () => {
-  return <Fragment>
-     <div className="App">
+  return (
+    <Fragment>
+      <div className="App">
         <Header />
         <MobHeader />
         <User />
 
-     
- 
         <Footer />
-      </div></Fragment>;
+      </div>
+    </Fragment>
+  );
 };

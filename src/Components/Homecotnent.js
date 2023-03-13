@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import telegram from "../Components/Images/telegram.svg"
 
 export const Homecotnent = () => {
@@ -18,6 +19,7 @@ export const Homecotnent = () => {
                   <div className='home-content-buttn'>
                     <ul>
                      <li className='loginbtn' ><a href='/login'><img src={telegram} alt="Telegram"/> Log in with Telegram </a></li>  
+                     <li className='loginbtn' ><Link to='/profile'>Profile </Link></li>  
                     </ul>
                  </div>
                  {/* <button className={isActive ? 'bnnerbtn' : 'hidebtn'} onClick={handleClick} > hello</button> */}
