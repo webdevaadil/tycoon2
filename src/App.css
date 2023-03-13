@@ -190,7 +190,7 @@ img.noti {
 }
 
 .home-content-buttn ul li.loginbtn {
-  margin-right: 10px;
+  margin-right: 30px;
 }
 
 .home-content-buttn ul li a {
@@ -230,6 +230,19 @@ table.table.table-hover.media_table {
   border-spacing: 0 14px;
 } */
 
+/* chart */
+.recharts-surface {
+  height: 120%;
+  width: 120%;
+}
+.recharts-legend-wrapper {
+  bottom: -20px !important;
+  display: none;
+}
+li.recharts-legend-item.legend-item-0 {
+  display: none;
+}
+/* chart */
 
 .product-sortss {
   margin-top: 20px;
@@ -1128,7 +1141,7 @@ td.openpnl {
 .graph-main {
   background: #0E1A29;
   color: #FFFFFF;
-  padding: 20px 43px 20px 43px;
+  padding: 20px 43px 90px 43px;
   border-radius: 10px;
   margin-top: 50px;
 }

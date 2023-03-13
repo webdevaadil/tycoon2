@@ -83,6 +83,66 @@ export const User = () => {
       name: 'dec',
       pv: 200,
       
+    },
+    {
+      name: 'jan',
+      pv: 50,
+    },
+    {
+      name: 'feb',
+      pv: -100,
+      
+    },
+    {
+      name: 'mar',
+      pv: 20,
+      
+    },
+    {
+      name: 'apr',
+      pv: 30,
+      
+    },
+    {
+      name: 'may',
+      pv: 50,
+      
+    },
+    {
+      name: 'jun',
+      pv: 70,
+      
+    },
+    {
+      name: 'jul',
+      pv: 90,
+      
+    },
+    {
+      name: 'aug',
+      pv: 110,
+      
+    },
+    
+    {
+      name: 'sept',
+      pv: 130,
+      
+    },
+    {
+      name: 'oct',
+      pv: 150,
+      
+    },
+    {
+      name: 'nov',
+      pv: 180,
+      
+    },
+    {
+      name: 'dec',
+      pv: 200,
+      
     }
   ];
   return (
@@ -252,7 +312,7 @@ export const User = () => {
               <td>1.20654</td>
               <td>2023-02-20 16:15:36</td>
               <td className="openrol">-8.34%</td>
-              <td className="openpnl"> -125.52 </td>
+              <td className="openpnl"> -$125.52 </td>
             </tr>
             <tr className="openposition">
               <td className="opsymbol">CRVUSDT Perpetual<br/><span>Short</span>|<span>24x</span></td>
@@ -260,7 +320,7 @@ export const User = () => {
               <td>1.20654</td>
               <td>2023-02-20 16:15:36</td>
               <td className="openrol">-8.34%</td>
-              <td className="openpnl"> -125.52 </td>
+              <td className="openpnl"> -$125.52 </td>
             </tr>
             <tr className="openposition">
               <td className="opsymbol">CRVUSDT Perpetual<br/><span>Short</span>|<span>24x</span></td>
@@ -268,7 +328,7 @@ export const User = () => {
               <td>1.20654</td>
               <td>2023-02-20 16:15:36</td>
               <td className="openrol">-8.34%</td>
-              <td className="openpnl"> -125.52 </td>
+              <td className="openpnl"> -$125.52 </td>
             </tr>
 
            
