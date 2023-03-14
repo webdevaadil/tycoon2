@@ -18,132 +18,119 @@ import winrate from "../Components/Images/trophy 1.svg";
 import average from "../Components/Images/average.svg";
 import tradeduration from "../Components/Images/history1.svg";
 import biggestsingle from "../Components/Images/bankruptcy1.svg";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 import { Link } from "react-router-dom";
 
 export const User = () => {
   const data = [
     {
-      name: 'jan',
+      name: "jan",
       pv: 50,
     },
     {
-      name: 'feb',
+      name: "feb",
       pv: -100,
-      
     },
     {
-      name: 'mar',
+      name: "mar",
       pv: 20,
-      
     },
     {
-      name: 'apr',
+      name: "apr",
       pv: 30,
-      
     },
     {
-      name: 'may',
+      name: "may",
       pv: 50,
-      
     },
     {
-      name: 'jun',
+      name: "jun",
       pv: 70,
-      
     },
     {
-      name: 'jul',
+      name: "jul",
       pv: 90,
-      
     },
     {
-      name: 'aug',
+      name: "aug",
       pv: 110,
-      
     },
-    
+
     {
-      name: 'sept',
+      name: "sept",
       pv: 130,
-      
     },
     {
-      name: 'oct',
+      name: "oct",
       pv: 150,
-      
     },
     {
-      name: 'nov',
+      name: "nov",
       pv: 180,
-      
     },
     {
-      name: 'dec',
+      name: "dec",
       pv: 200,
-      
     },
     {
-      name: 'jan',
+      name: "jan",
       pv: 50,
     },
     {
-      name: 'feb',
+      name: "feb",
       pv: -100,
-      
     },
     {
-      name: 'mar',
+      name: "mar",
       pv: 20,
-      
     },
     {
-      name: 'apr',
+      name: "apr",
       pv: 30,
-      
     },
     {
-      name: 'may',
+      name: "may",
       pv: 50,
-      
     },
     {
-      name: 'jun',
+      name: "jun",
       pv: 70,
-      
     },
     {
-      name: 'jul',
+      name: "jul",
       pv: 90,
-      
     },
     {
-      name: 'aug',
+      name: "aug",
       pv: 110,
-      
     },
-    
+
     {
-      name: 'sept',
+      name: "sept",
       pv: 130,
-      
     },
     {
-      name: 'oct',
+      name: "oct",
       pv: 150,
-      
     },
     {
-      name: 'nov',
+      name: "nov",
       pv: 180,
-      
     },
     {
-      name: 'dec',
+      name: "dec",
       pv: 200,
-      
-    }
+    },
   ];
   return (
     <div className="container-f profile-design">
@@ -153,7 +140,11 @@ export const User = () => {
           <div className="home-content-buttn">
             <ul>
               <li className="loginbtn">
-                <Link to="/">  <span style={{marginTop:"-2px"}}> {`${'<'}`}</span><span> Back to Leaderboard </span></Link>
+                <Link to="/">
+                  {" "}
+                  <span style={{ marginTop: "-2px" }}> {`${"<"}`}</span>
+                  <span> Back to Leaderboard </span>
+                </Link>
               </li>
             </ul>
           </div>
@@ -184,7 +175,7 @@ export const User = () => {
               <input
                 type="button"
                 value="+ Follow"
-                className="btn btn-primary"
+                className="btn btn-primary follow"
                 onClick={(e) => {
                   if (e.target.value == "+ Follow") {
                     e.target.value = "- Unfollow";
@@ -199,7 +190,7 @@ export const User = () => {
               <input
                 type="button"
                 value="Mark as Favorite"
-                className="btn btn-primary favs"
+                className="btn btn-primary Favorite"
                 onClick={(e) => {
                   if (e.target.value == "Favorite") {
                     e.target.value = "Mark as Favorite";
@@ -293,7 +284,7 @@ export const User = () => {
 
       {/********************************* openposition *********************************/}
       <div className="statistics-main mainopen">
-        <h3>Open Positions  </h3>
+        <h3>Open Positions </h3>
 
         <div className="table-main">
           <table className="table-user">
@@ -307,7 +298,11 @@ export const User = () => {
             </tr>
 
             <tr className="openposition">
-              <td className="opsymbol">CRVUSDT Perpetual<br/><span>Short</span>|<span>24x</span></td>
+              <td className="opsymbol">
+                CRVUSDT Perpetual
+                <br />
+                <span>Short</span>|<span>24x</span>
+              </td>
               <td>7155.9</td>
               <td>1.20654</td>
               <td>2023-02-20 16:15:36</td>
@@ -315,7 +310,11 @@ export const User = () => {
               <td className="openpnl"> -$125.52 </td>
             </tr>
             <tr className="openposition">
-              <td className="opsymbol">CRVUSDT Perpetual<br/><span>Short</span>|<span>24x</span></td>
+              <td className="opsymbol">
+                CRVUSDT Perpetual
+                <br />
+                <span>Short</span>|<span>24x</span>
+              </td>
               <td>7155.9</td>
               <td>1.20654</td>
               <td>2023-02-20 16:15:36</td>
@@ -323,18 +322,18 @@ export const User = () => {
               <td className="openpnl"> -$125.52 </td>
             </tr>
             <tr className="openposition">
-              <td className="opsymbol">CRVUSDT Perpetual<br/><span>Short</span>|<span>24x</span></td>
+              <td className="opsymbol">
+                CRVUSDT Perpetual
+                <br />
+                <span>Short</span>|<span>24x</span>
+              </td>
               <td>7155.9</td>
               <td>1.20654</td>
               <td>2023-02-20 16:15:36</td>
               <td className="openrol">-8.34%</td>
               <td className="openpnl"> -$125.52 </td>
             </tr>
-
-           
-           
-           
-                     </table>
+          </table>
         </div>
       </div>
       {/********************************* openposition *********************************/}
@@ -346,11 +345,10 @@ export const User = () => {
           <h3> Performance </h3>
           <div className="table_top_a">
             <div className="table_top_sort">
-              <label htmlFor="sortby" className="label_sort">
-                Sort by
-              </label>
-
-              <div class="select">
+              <div class="select select-wrap">
+                <label htmlFor="sortby" className="label_sort">
+                  Sort by
+                </label>
                 <select
                   name="sortby"
                   //  onChange={changeState}
@@ -363,14 +361,11 @@ export const User = () => {
               </div>
             </div>
 
-   
-
             <div className="table_top_time">
-              <label htmlFor="time" className="label_time">
-                Time
-              </label>
-
-              <div class="select">
+              <div class="select select-wrap">
+                <label htmlFor="time" className="label_time">
+                  Time
+                </label>
                 <select
                   name="time"
                   id="format"
@@ -398,35 +393,37 @@ export const User = () => {
                 </select>
               </div>
             </div>
-            </div>
+          </div>
         </div>
-            <LineChart
-      width={1000}
-      height={300}
-      data={data}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 1" />
-      <XAxis dataKey="name"  dx={10}/>
-      <YAxis    tickFormatter={(tick) => {
-     return `${tick}%`;
-     }} />
-      <Tooltip />
-      <Legend />
-      <Line
-        type="linear"
-        dataKey="pv"
-        stroke="#00BA80"
-        activeDot={{ r: 8 }}
-      />
-    
-    </LineChart>
-        
+        <div className="graphtop">
+          <LineChart
+            width={1000}
+            height={400}
+            data={data}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 1" />
+            <XAxis dataKey="name" dx={10} />
+            <YAxis
+              tickFormatter={(tick) => {
+                return `${tick}%`;
+              }}
+            />
+            <Tooltip />
+            <Legend />
+            <Line
+              type="linear"
+              dataKey="pv"
+              stroke="#00BA80"
+              activeDot={{ r: 8 }}
+            />
+          </LineChart>
+        </div>
       </div>
 
       {/********************************* Statistics *********************************/}
@@ -472,7 +469,7 @@ export const User = () => {
 
           <div className="statistics-con-box">
             <img src={average} alt="Average Position Size" />
-            <h4 className="blue">354 </h4>
+            <h4 className="blue">$354 </h4>
             <p> Average Position Size </p>
           </div>
 
@@ -508,7 +505,11 @@ export const User = () => {
             </tr>
 
             <tr>
-              <td className="phsymbol"><p>CRVUSDT Perpetual</p><span className="phshort">Short</span>|<span className="phyellow">24x</span></td>
+              <td className="phsymbol">
+                <p>CRVUSDT Perpetual</p>
+                <span className="phshort">Short</span>|
+                <span className="phyellow">24x</span>
+              </td>
               <td>7155.9</td>
               <td>1.20654</td>
               <td>2023-02-20 16:15:36</td>
@@ -519,7 +520,11 @@ export const User = () => {
             </tr>
 
             <tr>
-              <td className="phsymbol"><p>SIDUJU Perpetual</p><span className="phproi">Long</span>|<span className="phyellow">6x</span></td>
+              <td className="phsymbol">
+                <p>SIDUJU Perpetual</p>
+                <span className="phproi">Long</span>|
+                <span className="phyellow">6x</span>
+              </td>
               <td>7155.9</td>
               <td>1.20654</td>
               <td>2023-02-20 16:15:36</td>
@@ -530,7 +535,11 @@ export const User = () => {
             </tr>
 
             <tr>
-              <td className="phsymbol"><p>QWERTY Perpetual</p><span className="phyellow">Pair</span>|<span className="phyellow">3x</span></td>
+              <td className="phsymbol">
+                <p>QWERTY Perpetual</p>
+                <span className="phyellow">Pair</span>|
+                <span className="phyellow">3x</span>
+              </td>
               <td>7155.9</td>
               <td>1.20654</td>
               <td>2023-02-20 16:15:36</td>
@@ -541,7 +550,11 @@ export const User = () => {
             </tr>
 
             <tr>
-              <td className="phsymbol"><p>CPOIUFT Perpetual</p><span className="phlvymbol">Levarage</span>|<span className="phyellow">10x</span></td>
+              <td className="phsymbol">
+                <p>CPOIUFT Perpetual</p>
+                <span className="phlvymbol">Levarage</span>|
+                <span className="phyellow">10x</span>
+              </td>
               <td>7155.9</td>
               <td>1.20654</td>
               <td>2023-02-20 16:15:36</td>
@@ -552,7 +565,11 @@ export const User = () => {
             </tr>
 
             <tr>
-              <td className="phsymbol"><p>LKJGH Perpetual</p><span className="phshort">Short</span>|<span className="phyellow">8x</span></td>
+              <td className="phsymbol">
+                <p>LKJGH Perpetual</p>
+                <span className="phshort">Short</span>|
+                <span className="phyellow">8x</span>
+              </td>
               <td>7155.9</td>
               <td>1.20654</td>
               <td>2023-02-20 16:15:36</td>
