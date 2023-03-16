@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import profileimg from "../Components/Images/profile-u.png";
 import verifydimg from "../Components/Images/verified.svg";
 
@@ -32,6 +32,28 @@ import {
 import { Link } from "react-router-dom";
 
 export const User = () => {
+  class CustomizedAxisTick extends PureComponent {
+    render() {
+      const { x, y, stroke, payload } = this.props;
+
+      return (
+        <g transform={`translate(${x},${y})`}>
+          <text
+            x={0}
+            y={0}
+            dy={18}
+            dx={20}
+            textAnchor="end"
+            fontSize={"12px"}
+            fontWeight={400}
+            fill="#fff"
+          >
+            {payload.value.toUpperCase()}
+          </text>
+        </g>
+      );
+    }
+  }
   const data = [
     {
       name: "jan",
@@ -127,10 +149,6 @@ export const User = () => {
       name: "nov",
       pv: 180,
     },
-    {
-      name: "dec",
-      pv: 200,
-    },
   ];
   return (
     <div className="container-f profile-design">
@@ -139,11 +157,13 @@ export const User = () => {
           <h3>Profile</h3>
           <div className="home-content-buttn">
             <ul>
-              <li className="loginbtn">
+              <li className="loginbtn btl">
                 <Link to="/">
                   {" "}
-                  <span style={{ marginTop: "-2px" }}> {`${"<"}`}</span>
-                  <span> Back to Leaderboard </span>
+                  <span>
+                    {" "}
+                    <em>＜</em> Back to Leaderboard{" "}
+                  </span>
                 </Link>
               </li>
             </ul>
@@ -287,53 +307,66 @@ export const User = () => {
         <h3>Open Positions </h3>
 
         <div className="table-main">
-          <table className="table-user">
-            <tr>
-              <th>Symbol</th>
-              <th>Size</th>
-              <th> Entry Price </th>
-              <th>Open Time</th>
-              <th>ROI</th>
-              <th>PNL</th>
-            </tr>
+          <div className="table-fn">
+            <table className="table-user">
+              <tr>
+                <th>Symbol</th>
+                <th>Size</th>
+                <th> Entry Price </th>
+                <th> Mark Price </th>
+                <th>Open Time</th>
+                <th>ROI</th>
+                <th>PNL</th>
+              </tr>
 
-            <tr className="openposition">
-              <td className="opsymbol">
-                CRVUSDT Perpetual
-                <br />
-                <span>Short</span>|<span>24x</span>
-              </td>
-              <td>7155.9</td>
-              <td>1.20654</td>
-              <td>2023-02-20 16:15:36</td>
-              <td className="openrol">-8.34%</td>
-              <td className="openpnl"> -$125.52 </td>
-            </tr>
-            <tr className="openposition">
-              <td className="opsymbol">
-                CRVUSDT Perpetual
-                <br />
-                <span>Short</span>|<span>24x</span>
-              </td>
-              <td>7155.9</td>
-              <td>1.20654</td>
-              <td>2023-02-20 16:15:36</td>
-              <td className="openrol">-8.34%</td>
-              <td className="openpnl"> -$125.52 </td>
-            </tr>
-            <tr className="openposition">
-              <td className="opsymbol">
-                CRVUSDT Perpetual
-                <br />
-                <span>Short</span>|<span>24x</span>
-              </td>
-              <td>7155.9</td>
-              <td>1.20654</td>
-              <td>2023-02-20 16:15:36</td>
-              <td className="openrol">-8.34%</td>
-              <td className="openpnl"> -$125.52 </td>
-            </tr>
-          </table>
+              <tr className="openposition">
+                <td className="opsymbol">
+                  CRVUSDT Perpetual
+                  <br />
+                  <span>Short</span>|<span>24x</span>
+                </td>
+                <td>7155.9</td>
+                <td>1.20654</td>
+                <td>1.22584 </td>
+                <td>2023-02-20 16:15:36</td>
+
+                <td className="openrol">-8.34%</td>
+                <td className="openpnl"> -125.52 </td>
+              </tr>
+              <tr className="openposition">
+                <td className="opsymbol">
+                  CRVUSDT Perpetual
+                  <br />
+                  <span>Short</span>|<span>24x</span>
+                </td>
+                <td>7155.9</td>
+                <td>1.20654</td>
+                <td>1.202554 </td>
+                <td>2023-02-20 16:15:36</td>
+                <td className="openrol">-8.34%</td>
+                <td className="openpnl"> -125.52 </td>
+              </tr>
+              <tr className="openposition">
+                <td className="opsymbol">
+                  CRVUSDT Perpetual
+                  <br />
+                  <span>Short</span>|<span>24x</span>
+                </td>
+                <td>7155.9</td>
+                <td>1.20654</td>
+                <td>1.202584 </td>
+                <td>2023-02-20 16:15:36</td>
+                <td className="openrol">-8.34%</td>
+                <td className="openpnl"> -125.52 </td>
+              </tr>
+            </table>
+          </div>
+          <div className="showing-c">
+            <p>
+              {" "}
+              Showing 1-03 of 1523 <span> ＜ ＞ </span>{" "}
+            </p>
+          </div>
         </div>
       </div>
       {/********************************* openposition *********************************/}
@@ -397,7 +430,7 @@ export const User = () => {
         </div>
         <div className="graphtop">
           <LineChart
-            width={1000}
+            width={1200}
             height={400}
             data={data}
             margin={{
@@ -407,20 +440,44 @@ export const User = () => {
               bottom: 5,
             }}
           >
-            <CartesianGrid strokeDasharray="3 1" />
-            <XAxis dataKey="name" dx={10} />
+            <CartesianGrid strokeDasharray="0 0 0" stroke="#495D75" />
+
+            <XAxis
+              dataKey="name"
+              dx={10}
+              tick={<CustomizedAxisTick />}
+              hide={false}
+              padding={{ left: 30 }}
+              tickLine={false}
+              axisLine={false}
+              
+            />
             <YAxis
+              strokeOpacity={0}
+              tickMargin={20}
+              padding={{ bottom: 30 }}
+              tickLine={false}
+              axisLine={false}
               tickFormatter={(tick) => {
                 return `${tick}%`;
               }}
             />
-            <Tooltip />
+            <Tooltip
+
+            
+              viewBox={{ x: 0, y: 0, width: 800, height: 400 }}
+              contentStyle={{ backgroundColor: "#0e1a29", color: "#00BA80" }}
+              itemStyle={{ borderBlockColor: "black" }}
+              cursorStyle={{ borderColor: "transparent" }}
+              cursor={{ stroke: "#01508C", strokeWidth: 2 }}
+            />
             <Legend />
             <Line
               type="linear"
               dataKey="pv"
               stroke="#00BA80"
-              activeDot={{ r: 8 }}
+              dot={false}
+              activeDot={{fill:"#041624",strokeWidth:1, r: 8 }}
             />
           </LineChart>
         </div>
@@ -465,6 +522,17 @@ export const User = () => {
             <img src={winrate} alt="Win Rate" />
             <h4 className="profit-c">55% </h4>
             <p> Win Rate </p>
+
+            <div className="tooltipico">
+              {" "}
+              <div class="tooltip">
+                {" "}
+                <img src={tooltipinfo} alt="Total Profit" />
+                <span class="tooltiptext">
+                  The sum of all trades since tracking on Tycoon.{" "}
+                </span>
+              </div>{" "}
+            </div>
           </div>
 
           <div className="statistics-con-box">
@@ -488,97 +556,105 @@ export const User = () => {
       </div>
 
       {/********************************* Positions History *********************************/}
-      <div className="statistics-main">
+      <div className="positions-historys">
         <h3>Positions History </h3>
 
         <div className="table-main">
-          <table className="table-user">
-            <tr>
-              <th>Symbol</th>
-              <th>Size</th>
-              <th> Entry Price </th>
-              <th>Open Time</th>
-              <th>Close Time</th>
-              <th>ROI</th>
-              <th>PNL</th>
-              <th>Duration</th>
-            </tr>
+          <div className="table-fn">
+            <table className="table-user">
+              <tr>
+                <th>Symbol</th>
+                <th>Size</th>
+                <th> Entry Price </th>
+                <th>Open Time</th>
+                <th>Close Time</th>
+                <th>ROI</th>
+                <th>PNL</th>
+                <th>Duration</th>
+              </tr>
 
-            <tr>
-              <td className="phsymbol">
-                <p>CRVUSDT Perpetual</p>
-                <span className="phshort">Short</span>|
-                <span className="phyellow">24x</span>
-              </td>
-              <td>7155.9</td>
-              <td>1.20654</td>
-              <td>2023-02-20 16:15:36</td>
-              <td>2023-02-21 16:15:36</td>
-              <td className="phnroi">-8.34%</td>
-              <td className="phnroi"> -$125.52 </td>
-              <td> 02 Days</td>
-            </tr>
+              <tr>
+                <td className="phsymbol">
+                  <p>CRVUSDT Perpetual</p>
+                  <span className="phshort">Short</span>|
+                  <span className="phyellow">24x</span>
+                </td>
+                <td>7155.9</td>
+                <td>1.20654</td>
+                <td>2023-02-20 16:15:36</td>
+                <td>2023-02-21 16:15:36</td>
+                <td className="phnroi">-8.34%</td>
+                <td className="phnroi"> -$125.52 </td>
+                <td> 02 Days</td>
+              </tr>
 
-            <tr>
-              <td className="phsymbol">
-                <p>SIDUJU Perpetual</p>
-                <span className="phproi">Long</span>|
-                <span className="phyellow">6x</span>
-              </td>
-              <td>7155.9</td>
-              <td>1.20654</td>
-              <td>2023-02-20 16:15:36</td>
-              <td>2023-02-21 16:15:36</td>
-              <td className="phproi">+8.34%</td>
-              <td className="phproi"> +$125.52 </td>
-              <td> 02 Days</td>
-            </tr>
+              <tr>
+                <td className="phsymbol">
+                  <p>SIDUJU Perpetual</p>
+                  <span className="phproi">Long</span>|
+                  <span className="phyellow">6x</span>
+                </td>
+                <td>7155.9</td>
+                <td>1.20654</td>
+                <td>2023-02-20 16:15:36</td>
+                <td>2023-02-21 16:15:36</td>
+                <td className="phproi">+8.34%</td>
+                <td className="phproi"> +$125.52 </td>
+                <td> 02 Days</td>
+              </tr>
 
-            <tr>
-              <td className="phsymbol">
-                <p>QWERTY Perpetual</p>
-                <span className="phyellow">Pair</span>|
-                <span className="phyellow">3x</span>
-              </td>
-              <td>7155.9</td>
-              <td>1.20654</td>
-              <td>2023-02-20 16:15:36</td>
-              <td>2023-02-21 16:15:36</td>
-              <td className="phproi">+8.34%</td>
-              <td className="phproi"> +$125.52 </td>
-              <td> 02 Days</td>
-            </tr>
+              <tr>
+                <td className="phsymbol">
+                  <p>QWERTY Perpetual</p>
+                  <span className="phyellow">Pair</span>|
+                  <span className="phyellow">3x</span>
+                </td>
+                <td>7155.9</td>
+                <td>1.20654</td>
+                <td>2023-02-20 16:15:36</td>
+                <td>2023-02-21 16:15:36</td>
+                <td className="phproi">+8.34%</td>
+                <td className="phproi"> +$125.52 </td>
+                <td> 02 Days</td>
+              </tr>
 
-            <tr>
-              <td className="phsymbol">
-                <p>CPOIUFT Perpetual</p>
-                <span className="phlvymbol">Levarage</span>|
-                <span className="phyellow">10x</span>
-              </td>
-              <td>7155.9</td>
-              <td>1.20654</td>
-              <td>2023-02-20 16:15:36</td>
-              <td>2023-02-21 16:15:36</td>
-              <td className="phproi">+8.34%</td>
-              <td className="phproi"> +$125.52 </td>
-              <td> 02 Days</td>
-            </tr>
+              <tr>
+                <td className="phsymbol">
+                  <p>CPOIUFT Perpetual</p>
+                  <span className="phlvymbol">Levarage</span>|
+                  <span className="phyellow">10x</span>
+                </td>
+                <td>7155.9</td>
+                <td>1.20654</td>
+                <td>2023-02-20 16:15:36</td>
+                <td>2023-02-21 16:15:36</td>
+                <td className="phproi">+8.34%</td>
+                <td className="phproi"> +$125.52 </td>
+                <td> 02 Days</td>
+              </tr>
 
-            <tr>
-              <td className="phsymbol">
-                <p>LKJGH Perpetual</p>
-                <span className="phshort">Short</span>|
-                <span className="phyellow">8x</span>
-              </td>
-              <td>7155.9</td>
-              <td>1.20654</td>
-              <td>2023-02-20 16:15:36</td>
-              <td>2023-02-21 16:15:36</td>
-              <td className="phnroi">-8.34%</td>
-              <td className="phnroi"> -$125.52 </td>
-              <td> 02 Days</td>
-            </tr>
-          </table>
+              <tr>
+                <td className="phsymbol">
+                  <p>LKJGH Perpetual</p>
+                  <span className="phshort">Short</span>|
+                  <span className="phyellow">8x</span>
+                </td>
+                <td>7155.9</td>
+                <td>1.20654</td>
+                <td>2023-02-20 16:15:36</td>
+                <td>2023-02-21 16:15:36</td>
+                <td className="phnroi">-8.34%</td>
+                <td className="phnroi"> -$125.52 </td>
+                <td> 02 Days</td>
+              </tr>
+            </table>
+          </div>
+          <div className="showing-c">
+            <p>
+              {" "}
+              Showing 1-03 of 1523 <span> ＜ ＞ </span>{" "}
+            </p>
+          </div>
         </div>
       </div>
     </div>
