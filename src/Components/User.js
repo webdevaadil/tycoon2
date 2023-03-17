@@ -35,20 +35,42 @@ export const User = () => {
   class CustomizedAxisTick extends PureComponent {
     render() {
       const { x, y, stroke, payload } = this.props;
-
+console.log(payload);
       return (
         <g transform={`translate(${x},${y})`}>
           <text
             x={0}
             y={0}
             dy={18}
-            dx={20}
+            dx={18}
             textAnchor="end"
             fontSize={"12px"}
             fontWeight={400}
             fill="#fff"
           >
             {payload.value.toUpperCase()}
+          </text>
+        </g>
+      );
+    }
+  }
+  class CustomizedAxisTicks extends PureComponent {
+    render() {
+      const { x, y, stroke, payload } = this.props;
+
+      return (
+        <g transform={`translate(${x},${y})`}>
+          <text
+            x={0}
+            y={0}
+            dy={5}
+            dx={20}
+            textAnchor="end"
+            fontSize={"12px"}
+            fontWeight={400}
+            fill="#fff"
+          >
+            {payload.value}%
           </text>
         </g>
       );
@@ -430,7 +452,7 @@ export const User = () => {
         </div>
         <div className="graphtop">
           <LineChart
-            width={1200}
+            width={1302}
             height={400}
             data={data}
             margin={{
@@ -440,16 +462,15 @@ export const User = () => {
               bottom: 5,
             }}
           >
-            <CartesianGrid strokeDasharray="0 0 0" stroke="#495D75" />
+            <CartesianGrid strokeDasharray="0 0 0" stroke="#8090a31c" />
 
             <XAxis
               dataKey="name"
-              dx={10}
               tick={<CustomizedAxisTick />}
-              hide={false}
               padding={{ left: 30 }}
               tickLine={false}
               axisLine={false}
+              // allowDuplicatedCategory={false}
               
             />
             <YAxis
@@ -458,6 +479,8 @@ export const User = () => {
               padding={{ bottom: 30 }}
               tickLine={false}
               axisLine={false}
+              tick={<CustomizedAxisTicks />}
+
               tickFormatter={(tick) => {
                 return `${tick}%`;
               }}

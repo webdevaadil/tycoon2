@@ -1226,7 +1226,7 @@ td.openpnl {
 .graph-main {
   background: #0e1a29;
   color: #ffffff;
-  padding: 20px 43px 90px 43px;
+  padding: 20px 43px 73px 43px;
   border-radius: 10px;
   margin-top: 35px;
 }
@@ -1362,9 +1362,9 @@ td.phsymbol span {
   line-height: 13px;
 }
 .recharts-wrapper {
-  top: 50px;
-  padding-top: 32px;
-  padding-bottom: 46px;
+  top: 16px;
+  /* padding-top: 32px; */
+  /* padding-bottom: 46px; */
   margin: 0 auto !important;
 }
 td.opsymbol {
@@ -1398,10 +1398,15 @@ td.opsymbol {
 
 
 
+.recharts-tooltip-wrapper.recharts-tooltip-wrapper-right.recharts-tooltip-wrapper-bottom {
+  border-color: none !important;
+}
 
 
 
-
+.recharts-wrapper {
+  left: -40px;
+}
 /*************responsive css************/
 
 @media (max-width: 1350px) {
@@ -1419,7 +1424,7 @@ td.opsymbol {
     width: 14.6%;
   }
   .recharts-wrapper {
-    transform: scale(1.2) !important;
+    /* transform: scale(1.2) !important; */
 }
 
 
@@ -1434,7 +1439,7 @@ td.opsymbol {
 
 
 
-@media (max-width: 1160px) {
+@media (max-width: 1350px) {
   .graphtop{
     overflow-x: scroll;
     overflow-y: hidden;
@@ -1466,6 +1471,10 @@ td.opsymbol {
 
 }
 @media (max-width: 992px) {
+
+  .tooltip .tooltiptext {
+    right: 0;
+  }
   .product-sortss table.table .table-hover.media_table td.body_profitloss h6,
   .product-sortss table.table.table-hover.media_table td.body_trades h6,
   .product-sortss table.table.table-hover.media_table td.body_traderequity h6,
@@ -1633,9 +1642,7 @@ td.opsymbol {
   .table-user tr:first-child > th:first-child {
     padding-left: 20px;
 }
-.tooltip .tooltiptext {
-  right: 0;
-}
+
 .positions-historys {
   padding: 24px 19px;
 }
