@@ -300,15 +300,15 @@ th.head_trader {
   color: #FFBA00 !important;
 } */
 
-.follow:hover {
+/* .follow:hover {
   background: transparent !important;
   color: #ffba00 !important;
-}
+} */
 .Favorite {
   background: transparent !important;
   color: #ffba00 !important;
 }
-.Favorite:hover {
+/* .Favorite:hover {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
     linear-gradient(
       265.56deg,
@@ -319,7 +319,7 @@ th.head_trader {
     ) !important;
   border: 1px solid #c9a149 !important;
   color: #041624 !important;
-}
+} */
 .ctt tr.sub-body {
   background: #0e1a29;
   border-radius: 5px;
@@ -1232,7 +1232,7 @@ td.openpnl {
 }
 .proformance-colms {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 .proformance-colms h3 {
   font-size: 24px;
@@ -1441,8 +1441,9 @@ td.opsymbol {
 
 @media (max-width: 1350px) {
   .graphtop{
-    overflow-x: scroll;
-    overflow-y: hidden;
+    overflow-x: scroll !important;
+    overflow-y: hidden !important;
+    height: 410px !important;
   }
 }
 
@@ -1709,7 +1710,16 @@ td.opsymbol {
   .left-footer {
     text-align: center;
   }
-
+  .recharts-wrapper {
+    transform: none !important;
+    top: 0;
+    left:0;
+    width: auto !important;
+    height: auto !important;
+}
+.graphtop{
+  height:  auto!important;
+}
   .right-footer {
     display: none;
   }
@@ -1777,6 +1787,7 @@ td.opsymbol {
   }
   .proformance-colms {
     flex-wrap: wrap;
+    padding-bottom: 20px;
   } 
   .btl a {
     padding-right: 15px !important;
@@ -1796,6 +1807,7 @@ td.opsymbol {
   width: 31.2%;
   margin: 10px;
 }
+
 
 
 
@@ -2001,6 +2013,7 @@ td.opsymbol {
   .recharts-wrapper {
     transform: none !important;
     top: 0;
+    left:0;
     width: auto !important;
     height: auto !important;
 }
@@ -2025,10 +2038,11 @@ td.opsymbol {
 }
 .positions-historys h3 {
   margin-bottom: 20px;
-  font-size: 18px;
+  font-size: 16px;
 }
 .proformance-colms h3 {
   font-size: 18px;
+  margin-right: 10px;
 }
 .statistics-main {
   margin-top: 25px;

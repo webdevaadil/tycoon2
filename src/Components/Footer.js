@@ -27,7 +27,7 @@ export const Footer = () => {
                     </div>
                 </div>
             </div>
-            <div className='container mbl-container'> <p className='mbl-copyrights'>© © 2023 TYCOON -. All Rights Reserved</p></div>
+            {/* <div className='container mbl-container'> <p className='mbl-copyrights'>© © 2023 TYCOON -. All Rights Reserved</p></div> */}
         </div>
     )
 }
