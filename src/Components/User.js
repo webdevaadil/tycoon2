@@ -304,7 +304,7 @@ console.log(payload);
             </div>
 
             <div className="schedule-ranks">
-              <p> Daily Rank</p>
+              <p className="schedule-ranksfirst"> Daily Rank</p>
               <h4>1,344</h4>
             </div>
 

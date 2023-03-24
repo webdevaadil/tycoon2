@@ -1657,6 +1657,9 @@ td.opsymbol {
   .profile-design {
     margin-top: 21px;
 }
+/* .schedule-ranksfirst {
+  min-height: 29px;
+} */
 
 
 
@@ -2055,8 +2058,17 @@ td.opsymbol {
 
 
 
-@media (max-width: 400px) {
+@media (max-width: 455px) {
+  .schedule-ranksfirst {
+    min-height: 29px;
+  }
 
+
+}
+@media (max-width: 400px) {
+  .schedule-ranksfirst {
+    min-height: 29px;
+  }
 
 .icon-boxs {
   width: 38.2% !important;
