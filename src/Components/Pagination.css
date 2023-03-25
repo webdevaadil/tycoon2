@@ -1,7 +1,8 @@
-.page_button{
+.page_button {
     display: flex;
     justify-content: end;
     color: white;
+    margin-bottom: 10px;
 }
 .page_button_content{
     display: flex;

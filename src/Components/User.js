@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, useState } from "react";
 import profileimg from "../Components/Images/profile-u.png";
 import verifydimg from "../Components/Images/verified.svg";
 
@@ -30,12 +30,13 @@ import {
 } from "recharts";
 
 import { Link } from "react-router-dom";
+import { Pagination } from "./Pagination";
+import { Pagination1 } from "./Pagination1";
 
 export const User = () => {
   class CustomizedAxisTick extends PureComponent {
     render() {
       const { x, y, stroke, payload } = this.props;
-console.log(payload);
       return (
         <g transform={`translate(${x},${y})`}>
           <text
@@ -172,6 +173,95 @@ console.log(payload);
       pv: 180,
     },
   ];
+  const opdata = [
+  
+    {
+      Symbol: "CRVUSDT Perpetual",
+      Symbol1: "Short",
+      Symbol2: "24x",
+      size: "7155.9",
+      "Entry Price": "1.20654",
+      "Mark Price": "1.20654",
+      "Open Time": "2023-02-20 16:15:36",
+      ROI: "-8.34%",
+      PNL: "	-$125.52",
+      Duration: "2days",
+      "close Time": "2023-02-20 16:15:36",
+    },
+    {
+      Symbol: "CRVUSDT Perpetual",
+      Symbol1: "Short",
+      Symbol2: "24x",
+      size: "7155.9",
+      "Entry Price": "1.20654",
+      "Mark Price": "1.20654",
+      "Open Time": "2023-02-20 16:15:36",
+      ROI: "-8.34%",
+      PNL: "	-$251.52",
+      Duration: "2days",
+      "close Time": "2023-02-20 16:15:36",
+    },
+    {
+      Symbol: "CRVUSDT Perpetual",
+      Symbol1: "Short",
+      Symbol2: "24x",
+      size: "7155.9",
+      "Entry Price": "1.20654",
+      "Mark Price": "1.20654",
+      "Open Time": "2023-02-20 16:15:36",
+      ROI: "-8.34%",
+      PNL: "	-$251.52",
+      Duration: "2days",
+      "close Time": "2023-02-20 16:15:36",
+    },
+    {
+      Symbol: "CRVUSDT Perpetual",
+      Symbol1: "Short",
+      Symbol2: "24x",
+      size: "7155.9",
+      "Entry Price": "1.20654",
+      "Mark Price": "1.20654",
+      "Open Time": "2023-02-20 16:15:36",
+      ROI: "-8.34%",
+      PNL: "	-$251.52",
+      Duration: "2days",
+      "close Time": "2023-02-20 16:15:36",
+    },
+    {
+      Symbol: "CRVUSDT Perpetual",
+      Symbol1: "Short",
+      Symbol2: "24x",
+      size: "7155.9",
+      "Entry Price": "1.20654",
+      "Mark Price": "1.20654",
+      "Open Time": "2023-02-20 16:15:36",
+      ROI: "-8.34%",
+      PNL: "	-$125.52",
+      Duration: "2days",
+      "close Time": "2023-02-20 16:15:36",
+    },
+    {
+      Symbol: "CRVUSDT Perpetual",
+      Symbol1: "Short",
+      Symbol2: "24x",
+      size: "7155.9",
+      "Entry Price": "1.20654",
+      "Mark Price": "1.20654",
+      "Open Time": "2023-02-20 16:15:36",
+      ROI: "-8.34%",
+      PNL: "	-$125.52",
+      Duration: "2days",
+      "close Time": "2023-02-20 16:15:36",
+    },
+  ];
+  // op pagination
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recordsPerPage] = useState(3);
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  const currentRecords = opdata.slice(indexOfFirstRecord, indexOfLastRecord);
+  const nPages = Math.ceil(opdata.length / recordsPerPage);
   return (
     <div className="container-f profile-design">
       <div className="table_heading">
@@ -340,53 +430,42 @@ console.log(payload);
                 <th>ROI</th>
                 <th>PNL</th>
               </tr>
+              {currentRecords.map((item, index) => {
+                return (
+                  <tr className="openposition">
+                    <td className="opsymbol">
+                      {item.Symbol}
+                      <br />
+                      <span> {item.Symbol1}</span>|<span> {item.Symbol2}</span>
+                    </td>
+                    <td> {item.size}</td>
+                    <td> {item["Entry Price"]}</td>
+                    <td>{item["Mark Price"]} </td>
+                    <td>{item["Open Time"]}</td>
 
-              <tr className="openposition">
-                <td className="opsymbol">
-                  CRVUSDT Perpetual
-                  <br />
-                  <span>Short</span>|<span>24x</span>
-                </td>
-                <td>7155.9</td>
-                <td>1.20654</td>
-                <td>1.22584 </td>
-                <td>2023-02-20 16:15:36</td>
-
-                <td className="openrol">-8.34%</td>
-                <td className="openpnl"> -125.52 </td>
-              </tr>
-              <tr className="openposition">
-                <td className="opsymbol">
-                  CRVUSDT Perpetual
-                  <br />
-                  <span>Short</span>|<span>24x</span>
-                </td>
-                <td>7155.9</td>
-                <td>1.20654</td>
-                <td>1.202554 </td>
-                <td>2023-02-20 16:15:36</td>
-                <td className="openrol">-8.34%</td>
-                <td className="openpnl"> -125.52 </td>
-              </tr>
-              <tr className="openposition">
-                <td className="opsymbol">
-                  CRVUSDT Perpetual
-                  <br />
-                  <span>Short</span>|<span>24x</span>
-                </td>
-                <td>7155.9</td>
-                <td>1.20654</td>
-                <td>1.202584 </td>
-                <td>2023-02-20 16:15:36</td>
-                <td className="openrol">-8.34%</td>
-                <td className="openpnl"> -125.52 </td>
-              </tr>
+                    <td className="openrol">{item.ROI}</td>
+                    <td className="openpnl">{item.PNL} </td>
+                  </tr>
+                );
+              })}
             </table>
           </div>
           <div className="showing-c">
-            <p>
+            <p
+              style={{
+                display: "flex",
+                justifyContent: "end",
+                alignItems: "center",
+                paddingBottom: "14px",
+              }}
+            >
               {" "}
-              Showing 1-03 of 1523 <span> ＜ ＞ </span>{" "}
+              Showing {currentPage}-0{recordsPerPage} of {nPages}{" "}
+              <Pagination1
+                nPages={nPages}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />{" "}
             </p>
           </div>
         </div>
@@ -471,7 +550,6 @@ console.log(payload);
               tickLine={false}
               axisLine={false}
               // allowDuplicatedCategory={false}
-              
             />
             <YAxis
               strokeOpacity={0}
@@ -480,14 +558,11 @@ console.log(payload);
               tickLine={false}
               axisLine={false}
               tick={<CustomizedAxisTicks />}
-
               tickFormatter={(tick) => {
                 return `${tick}%`;
               }}
             />
             <Tooltip
-
-            
               viewBox={{ x: 0, y: 0, width: 800, height: 400 }}
               contentStyle={{ backgroundColor: "#0e1a29", color: "#00BA80" }}
               itemStyle={{ borderBlockColor: "black" }}
@@ -500,7 +575,7 @@ console.log(payload);
               dataKey="pv"
               stroke="#00BA80"
               dot={false}
-              activeDot={{fill:"#041624",strokeWidth:1, r: 8 }}
+              activeDot={{ fill: "#041624", strokeWidth: 1, r: 8 }}
             />
           </LineChart>
         </div>
@@ -595,8 +670,26 @@ console.log(payload);
                 <th>PNL</th>
                 <th>Duration</th>
               </tr>
+              {currentRecords.map((item, index) => {
+                return (
+                  <tr className="openposition">
+                    <td className="opsymbol">
+                      {item.Symbol}
+                      <br />
+                      <span> {item.Symbol1}</span>|<span> {item.Symbol2}</span>
+                    </td>
+                    <td> {item.size}</td>
+                    <td> {item["Entry Price"]}</td>
+                    <td>{item["Open Time"]}</td>
+                    <td>{item["close Time"]} </td>
 
-              <tr>
+                    <td className="openrol">{item.ROI}</td>
+                    <td className="openpnl">{item.PNL} </td>
+                    <td >{item.Duration} </td>
+                  </tr>
+                );
+              })}
+              {/* <tr>
                 <td className="phsymbol">
                   <p>CRVUSDT Perpetual</p>
                   <span className="phshort">Short</span>|
@@ -608,10 +701,10 @@ console.log(payload);
                 <td>2023-02-21 16:15:36</td>
                 <td className="phnroi">-8.34%</td>
                 <td className="phnroi"> -$125.52 </td>
-                <td> 02 Days</td>
-              </tr>
+                <td> 02 Days</td> */}
+              {/* </tr> */}
 
-              <tr>
+              {/* <tr>
                 <td className="phsymbol">
                   <p>SIDUJU Perpetual</p>
                   <span className="phproi">Long</span>|
@@ -669,14 +762,26 @@ console.log(payload);
                 <td className="phnroi">-8.34%</td>
                 <td className="phnroi"> -$125.52 </td>
                 <td> 02 Days</td>
-              </tr>
+              </tr> */}
             </table>
           </div>
           <div className="showing-c">
-            <p>
+          <p
+              style={{
+                display: "flex",
+                justifyContent: "end",
+                alignItems: "center",
+                paddingBottom: "14px",
+              }}
+            >
               {" "}
-              Showing 1-03 of 1523 <span> ＜ ＞ </span>{" "}
-            </p>
+              Showing {currentPage}-0{recordsPerPage} of {nPages}{" "}
+              <Pagination1
+                nPages={nPages}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />
+              </p>
           </div>
         </div>
       </div>
