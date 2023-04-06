@@ -4,7 +4,23 @@
    border-radius: 50%;
    margin-right: 6px;
 }
-
+/* tabs */
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected  {
+   background-color: #ffba00 !important;
+   color: #000 !important;
+   border-radius: 8px !important;
+}
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root{
+   color: #fff !important;
+   transition: all ease-in-out 0.6s;
+   margin-right: 10px !important;
+   text-transform: capitalize !important;
+   padding-right: 18px !important;
+   padding-left: 18px !important;
+}
+.css-1aquho2-MuiTabs-indicator{
+   display: none !important;
+}
 .bg_body {
    background-color: #18222E;
 
@@ -815,3 +831,5 @@ img.head-img1 {
     }
 
 }
+
+

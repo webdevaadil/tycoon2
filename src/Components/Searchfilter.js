@@ -7,6 +7,10 @@ import dummy from "./Images/th-2964712677";
 import Mobbtn from "./Mobbtn";
 import Desbtn from "./Desbtn";
 import axios from "axios";
+import TabContext from "@mui/lab/TabContext";
+import TabPanel from "@mui/lab/TabPanel";
+import { TabList } from "@mui/lab";
+import Tab from "@mui/material/Tab";
 
 const useSortableData = (items, config = null) => {
   const [sortConfig, setSortConfig] = React.useState(config);
@@ -36,7 +40,7 @@ const useSortableData = (items, config = null) => {
       sortConfig.direction === "ascending"
     ) {
       direction = "descending";
-    } 
+    }
     setSortConfig({ key, direction });
   };
 
@@ -50,7 +54,6 @@ const ProductTable = ({
   periodType,
   sortType,
 }) => {
- 
   useEffect(() => {
     getClassNamesFor(`${periodType}${sortType}`);
     requestSort(`${periodType}${sortType}`);
@@ -63,7 +66,7 @@ const ProductTable = ({
       requestSort("dailyROI");
       getClassNamesFor("dailyROI");
     }
-  }, [periodType ,sortType]);
+  }, [periodType, sortType]);
 
   const [loadmores, setLoadmore] = useState(1);
 
@@ -388,7 +391,9 @@ const ProductTable = ({
                             {items.weeklyPNL && items.weeklyPNL < 0 ? (
                               <p>{`≈ ${new Intl.NumberFormat("en-US", {
                                 maximumFractionDigits: 2,
-                              }).format(items.weeklyPNL).replace(/\-/g, "-$")}`}</p>
+                              })
+                                .format(items.weeklyPNL)
+                                .replace(/\-/g, "-$")}`}</p>
                             ) : (
                               <p>{`≈ $${new Intl.NumberFormat("en-US", {
                                 maximumFractionDigits: 2,
@@ -417,7 +422,9 @@ const ProductTable = ({
                             {items.monthlyPNL && items.monthlyPNL < 0 ? (
                               <p>{`≈ ${new Intl.NumberFormat("en-US", {
                                 maximumFractionDigits: 2,
-                              }).format(items.monthlyPNL).replace(/\-/g, "-$")}`}</p>
+                              })
+                                .format(items.monthlyPNL)
+                                .replace(/\-/g, "-$")}`}</p>
                             ) : (
                               <p>{`≈ $${new Intl.NumberFormat("en-US", {
                                 maximumFractionDigits: 2,
@@ -444,7 +451,9 @@ const ProductTable = ({
                             {items.allPNL && items.allPNL < 0 ? (
                               <p>{`≈ ${new Intl.NumberFormat("en-US", {
                                 maximumFractionDigits: 2,
-                              }).format(items.allPNL).replace(/\-/g, "-$")}`}</p>
+                              })
+                                .format(items.allPNL)
+                                .replace(/\-/g, "-$")}`}</p>
                             ) : (
                               <p>{`≈ $${new Intl.NumberFormat("en-US", {
                                 maximumFractionDigits: 2,
@@ -665,14 +674,16 @@ const ProductTable = ({
                                 <h6>&nbsp;0%</h6>
                               )}
                               {items.weeklyPNL && items.weeklyPNL < 0 ? (
-                              <p>{`≈ ${new Intl.NumberFormat("en-US", {
-                                maximumFractionDigits: 2,
-                              }).format(items.weeklyPNL).replace(/\-/g, "-$")}`}</p>
-                            ) : (
-                              <p>{`≈ $${new Intl.NumberFormat("en-US", {
-                                maximumFractionDigits: 2,
-                              }).format(items.weeklyPNL)}`}</p>
-                            )}
+                                <p>{`≈ ${new Intl.NumberFormat("en-US", {
+                                  maximumFractionDigits: 2,
+                                })
+                                  .format(items.weeklyPNL)
+                                  .replace(/\-/g, "-$")}`}</p>
+                              ) : (
+                                <p>{`≈ $${new Intl.NumberFormat("en-US", {
+                                  maximumFractionDigits: 2,
+                                }).format(items.weeklyPNL)}`}</p>
+                              )}
                             </div>
                           </div>
                           <div className="secondline_c">
@@ -708,15 +719,17 @@ const ProductTable = ({
                               ) : (
                                 <h6> &nbsp;0%</h6>
                               )}
-                             {items.monthlyPNL && items.monthlyPNL < 0 ? (
-                              <p>{`≈ ${new Intl.NumberFormat("en-US", {
-                                maximumFractionDigits: 2,
-                              }).format(items.monthlyPNL).replace(/\-/g, "-$")}`}</p>
-                            ) : (
-                              <p>{`≈ $${new Intl.NumberFormat("en-US", {
-                                maximumFractionDigits: 2,
-                              }).format(items.monthlyPNL)}`}</p>
-                            )}
+                              {items.monthlyPNL && items.monthlyPNL < 0 ? (
+                                <p>{`≈ ${new Intl.NumberFormat("en-US", {
+                                  maximumFractionDigits: 2,
+                                })
+                                  .format(items.monthlyPNL)
+                                  .replace(/\-/g, "-$")}`}</p>
+                              ) : (
+                                <p>{`≈ $${new Intl.NumberFormat("en-US", {
+                                  maximumFractionDigits: 2,
+                                }).format(items.monthlyPNL)}`}</p>
+                              )}
                             </div>
                           </div>
                           <div className="secondline_d">
@@ -753,14 +766,16 @@ const ProductTable = ({
                                 <h6> &nbsp;0%</h6>
                               )}
                               {items.allPNL && items.allPNL < 0 ? (
-                              <p>{`≈ ${new Intl.NumberFormat("en-US", {
-                                maximumFractionDigits: 2,
-                              }).format(items.allPNL).replace(/\-/g, "-$")}`}</p>
-                            ) : (
-                              <p>{`≈ $${new Intl.NumberFormat("en-US", {
-                                maximumFractionDigits: 2,
-                              }).format(items.allPNL)}`}</p>
-                            )}
+                                <p>{`≈ ${new Intl.NumberFormat("en-US", {
+                                  maximumFractionDigits: 2,
+                                })
+                                  .format(items.allPNL)
+                                  .replace(/\-/g, "-$")}`}</p>
+                              ) : (
+                                <p>{`≈ $${new Intl.NumberFormat("en-US", {
+                                  maximumFractionDigits: 2,
+                                }).format(items.allPNL)}`}</p>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -809,8 +824,16 @@ const ProductTable = ({
 };
 
 export const ProductSort1 = () => {
+  const [value, setValue] = useState("1");
+
+  const handleChange = (event, newValue) => {
+    console.log(newValue);
+    setValue(newValue);
+  };
+  console.log(value);
   const [sortType, setsortType] = useState("ROI");
   const [periodType, setperiodType] = useState("daily");
+
   useEffect(() => {
     apis();
   }, [sortType, periodType]);
@@ -836,7 +859,18 @@ export const ProductSort1 = () => {
     <>
       <div className="product-sortss">
         <div className="container">
-          {leaderboard && (
+          
+  <TabContext value={value}>
+  <TabList
+                onChange={handleChange}
+                aria-label="lab API tabs example"
+              >
+                <Tab label="All Traders" value="1" />
+                <Tab label="Favorites" value="2" />
+                <Tab label="Followed" value="3" />
+              </TabList>
+              <TabPanel value="1" sx={{ mt: "10px" }}>
+              {leaderboard && (
             <ProductTable
               changeStateperiod={changeStateperiod}
               changeState={changeState}
@@ -845,6 +879,30 @@ export const ProductSort1 = () => {
               sortType={sortType}
             />
           )}
+              </TabPanel>
+              <TabPanel value="2" sx={{ mt: "10px" }}>
+              {leaderboard && (
+            <ProductTable
+              changeStateperiod={changeStateperiod}
+              changeState={changeState}
+              products={[leaderboard]}
+              periodType={periodType}
+              sortType={sortType}
+            />
+          )}
+              </TabPanel>
+              <TabPanel value="3" sx={{ mt: "10px" }}>
+              {leaderboard && (
+            <ProductTable
+              changeStateperiod={changeStateperiod}
+              changeState={changeState}
+              products={[leaderboard]}
+              periodType={periodType}
+              sortType={sortType}
+            />
+          )}
+              </TabPanel>
+  </TabContext>
         </div>
       </div>
     </>
